@@ -1,6 +1,7 @@
 import GoogleButton from './icons/google-sign-in.svg';
 import WelcomeLogo from './icons/welcome.svg';
 import "../css/Login.css";
+import Container from '@mui/material/Container';
 // signInWithPopup(auth, provider)
 //   .then((result) => {
 //     // This gives you a Google Access Token. You can use it to access the Google API.
@@ -21,7 +22,7 @@ import "../css/Login.css";
 //   });
 const Login = () => {
     return (
-        <div>
+        <Container maxwidth="xl">
             <img className="welcomeImage" src={WelcomeLogo} alt="Main Welcome Symbol"/>
             <div className="rightContainer">
                 <h2 className="welcome">
@@ -33,7 +34,7 @@ const Login = () => {
                 </p>
                 <img className="googleButton" src={GoogleButton} alt="google"/>
             </div>
-        </div>
+        </Container>
     )
 }
 export default Login;

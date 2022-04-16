@@ -11,7 +11,7 @@ function Request(props) {
     }
 
     return (
-        <Card>
+        <Card onClick={props.onClick}>
             <CardActionArea>
                 <CardContent>
                     <Typography variant="h5" component="div">{props.title}</Typography>
@@ -19,7 +19,7 @@ function Request(props) {
                     <Typography variant="body2"><b>Requester: </b>{props.requester}</Typography>
                     <Typography variant="body2"><b>Priority: </b>{props.priority}</Typography>
                     <Typography variant="body2"><b>Location: </b>{props.location}</Typography>
-                    <Typography variant="body2"><b>Posted: </b>{formatDate(props.posted.toDate())}</Typography>
+                    {/* x */}
                 </CardContent>
             </CardActionArea>
         </Card>
