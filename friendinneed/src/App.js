@@ -16,7 +16,7 @@ function App() {
       <div>
         <Navbar />
         <Routes>
-          <Route path="/" element={0 ? <MainPage /> : <Login /> } />
+          <Route path="/" element={1 ? <HomePage /> : <Login /> } />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/user-profile" element={<UserProfile />} />

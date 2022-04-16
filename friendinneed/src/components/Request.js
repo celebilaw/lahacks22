@@ -8,7 +8,7 @@ import { CardActionArea, Typography } from '@mui/material';
 function Request(props) {
 
     return (
-        <Card >
+        <Card>
             <CardActionArea>
                 <CardContent>
                     <Typography variant="h5" component="div">{props.title}</Typography>
