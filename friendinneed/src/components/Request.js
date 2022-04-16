@@ -19,11 +19,11 @@ function Request(props) {
                     <Typography variant="body2"><b>Requester: </b>{props.requester}</Typography>
                     <Typography variant="body2"><b>Priority: </b>{props.priority}</Typography>
                     <Typography variant="body2"><b>Location: </b>{props.location}</Typography>
-                    <Typography variant="body2"><b>Posted: </b>{formatDate(props.posted.toDate())}</Typography>
+                    
                 </CardContent>
             </CardActionArea>
         </Card>
     );
 }
-
+//<Typography variant="body2"><b>Posted: </b>{formatDate(props.posted.toDate())}</Typography>
 export default Request;
