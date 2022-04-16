@@ -1,22 +1,36 @@
-import React from "react";
+import { useReducer, useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 import HomePage from './components/HomePage'
-import * as db from './config'
 import UserProfile from "./components/UserProfile.js";
 import MainPage from "./components/MainPage.js";
 import Login from "./components/Login.js";
 import Register from "./components/Register.js";
 import Navbar from "./components/NavBar.js";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+const auth = getAuth();
 
 function App() {
-  //const [user] = useAuthState(auth);
+  let [loggedin, setLoggedin] = useState(0);
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      setLoggedin(1);
+      // ...
+    } else {
+    }
+  });
+
+
   return (
     <BrowserRouter>
       <div>
         <Navbar />
         <Routes>
-          <Route path="/" element={0 ? <MainPage /> : <Login /> } />
+          <Route path="/" element={loggedin ? <MainPage /> : <Login /> } />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/user-profile" element={<UserProfile />} />
