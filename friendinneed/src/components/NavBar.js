@@ -4,9 +4,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import Logo from '../components/icons/logo.svg';
 import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import { MenuItem } from '@mui/material';
+import '@fontsource/patua-one';
 import "../css/Navbar.css";
 import PostRequest from './PostRequest';
 
@@ -20,7 +23,7 @@ const Navbar = () => {
         <div>
             <PostRequest />
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static">
+                <AppBar position="static" style={{background: 'white'}}>
                     <Toolbar>
                         <IconButton
                             size="large"
@@ -29,13 +32,10 @@ const Navbar = () => {
                             aria-label="logo"
                             sx={{ mr: 2 }}
                         >
-                            {/* friendInNeed Logo */}
-                            <MenuIcon />
+                            <img src={Logo} style = {{width: 50}} alt="logo"></img>
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            <Button variant="text">
-                                <Link className="navLink navTitle" to="/">friend in need</Link>
-                            </Button>
+                            <Link className='navTitle' to='/' style={{color: '#337DEF' , fontFamily: 'Patua One'}}>friend in need</Link>
                         </Typography>
                         <Stack direction="row" spacing={2}>
                             <Button variant="text">
@@ -51,5 +51,4 @@ const Navbar = () => {
         </div>
     )
 }
-
 export default Navbar;

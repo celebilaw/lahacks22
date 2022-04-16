@@ -1,26 +1,35 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useReducer, useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import HomePage from './components/HomePage'
-import * as db from './config'
-import UserProfile from "./components/UserProfile.js";
-import Login from "./components/Login.js";
-import Register from "./components/Register.js";
-import Navbar from "./components/NavBar.js";
-import BorrowRequests from "./components/GetBorrowRequests.js";
-
+import UserProfile from './components/UserProfile.js';
+import Login from './components/Login.js';
+import Register from './components/Register.js';
+import Navbar from './components/NavBar.js';
+import { auth } from'./config';
+import {onAuthStateChanged} from 'firebase/auth';
 function App() {
-  //const [user] = useAuthState(auth);
+  let [loggedin, setLoggedin] = useState(0);
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      setLoggedin(1);
+      // ...
+    } else {
+    }
+  });
   return (
     <BrowserRouter>
       <div>
         <Navbar />
         <Routes>
-          <Route path="/" element={1 ? <HomePage /> : <Login /> } />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/user-profile" element={<UserProfile />} />
-          <Route path="/get-borrow-requests" element={<BorrowRequests />} />
+          <Route path='/' element={loggedin ? <HomePage /> : <Login /> } />
+          <Route path='/about' element={<Login />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/user-profile' element={<UserProfile />} />
         </Routes>
       </div>
     </BrowserRouter>
