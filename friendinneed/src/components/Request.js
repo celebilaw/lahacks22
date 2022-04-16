@@ -36,6 +36,15 @@ function Request(props) {
                     size="small" 
                     color="primary"
                     onClick={() => {
+                        props.acceptRequest(props.id);
+                    }}
+                >
+                Help out this poor soul!
+                </Button>
+                <Button 
+                    size="small" 
+                    color="primary"
+                    onClick={() => {
                         props.completeRequest(props.id);
                     }}
                 >

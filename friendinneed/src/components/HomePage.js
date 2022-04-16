@@ -13,6 +13,13 @@ function HomePage() {
     await deleteDoc(docRef);
   }
 
+  const acceptRequest = async (id) => {
+    const docRef = doc(db, "borrowrequests", id);
+    await updateDoc(docRef, {
+      status: 1
+    });
+  }
+
   const completeRequest = async (id) => {
     const docRef = doc(db, "borrowrequests", id);
     await updateDoc(docRef, {
@@ -48,6 +55,7 @@ function HomePage() {
           posted={req.data.posted}
           location={req.data.location}
           cancelRequest={cancelRequest}
+          acceptRequest={acceptRequest}
           completeRequest={completeRequest}
         />
       ))}
