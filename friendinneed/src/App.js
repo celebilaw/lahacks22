@@ -1,5 +1,13 @@
-import logo from './logo.svg';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
+import HomePage from './components/HomePage'
+
+import UserProfile from "./components/user-profile.js";
+import MainPage from "./components/main-page.js";
+import Login from "./components/login.js";
+import Register from "./components/register.js";
+import Navbar from "./components/navbar.js";
 
 // Import the functions you need from the SDKs you need
 import firebase from 'firebase/compat/app';
@@ -30,14 +38,22 @@ const firestore = firebase.firestore();
 function App() {
   const [user] = useAuthState(auth);
   return (
-    <div className="App">
-      <p>
-        hello
-      </p>
+    <Router>
       <div>
-        {/* {user ? <ChatRoom /> : <SignIn /> } */}
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+            {/* {user ? <ChatRoom /> : <SignIn /> } */}
+          {/* 
+            probably do userprofile by ID? 
+            /userProfile/:id
+          */}
+          <Route path="/userProfile" element={<UserProfile />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
