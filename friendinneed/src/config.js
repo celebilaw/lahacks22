@@ -10,10 +10,10 @@ const firebaseConfig = {
   storageBucket: "friend-in-need-a2242.appspot.com",
   messagingSenderId: "832465345352",
   appId: "1:832465345352:web:9b9e4cc0e188e64d71317d",
-  measurementId: "G-9HM5 PLDX2P"
+  measurementId: "G-9HM5PLDX2P"
 };
 export const app = initializeApp(firebaseConfig);
-export const provider = new GoogleAuthProvider();
-export const auth = getAuth();
+export const provider = new GoogleAuthProvider(app);
+export const auth = getAuth(app);
 
 export const db = getFirestore(app);
