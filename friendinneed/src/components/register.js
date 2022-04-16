@@ -1,11 +1,9 @@
-import React from "react";
-
-export default class Register extends React.Component{
-    render() {
-        return (
-            <div>
-                Register Page
-            </div>
-        )
-    }
+const Register = () => {
+    return (
+        <div>
+            Register Page
+        </div>
+    )
 }
+
+export default Register;
