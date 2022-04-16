@@ -31,9 +31,7 @@ function HomePage() {
   }
 
   const handleSubmit = (e) => {
-    // Do some checks to ensure no blank fields are submitted
-
-
+    //TODO: Do some checks to ensure no blank fields are submitted
     console.log(item, urgency, loc);
 
     // Clear form elements when user submits
@@ -45,12 +43,17 @@ function HomePage() {
     document.getElementById("request-form").classList.toggle("show");
   }
 
+  const handleCancel = (e) => {
+    document.getElementById("request-form").classList.toggle("show");
+  }
+
   const detectClick = (e) => {
     let addIcon = document.getElementById("AddIcon");
     let requestForm = document.getElementById("request-form");
 
     // Close new request form IF it is open and user clicks outside of it
     if(!requestForm.contains(e.target) && requestForm.classList.contains("show")){
+      console.log("Hi")
       document.getElementById("request-form").classList.toggle("show");
     }
 
@@ -81,6 +84,7 @@ function HomePage() {
         <TextField label="Description" variant="outlined" value={description} onChange={handleDescChange} />
 
         <TextField
+          id="UrgencyLabel"
           value={urgency}
           onChange={handleUrgencyChange}
           select
@@ -89,6 +93,7 @@ function HomePage() {
         </TextField>
 
         <TextField
+          id="LocationLabel"
           value={loc}
           onChange={handleLocChange}
           select
@@ -97,6 +102,7 @@ function HomePage() {
         </TextField>
 
         <Button onClick={handleSubmit}>Submit Request</Button>
+        <Button onClick={handleCancel}>CANCEL</Button>
       </Stack>
 
       <div className="RequestCards">
