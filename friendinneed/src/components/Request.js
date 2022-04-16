@@ -3,7 +3,7 @@ import "./Request.css"
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import { CardActionArea, Typography } from '@mui/material';
+import { Button, CardActions, CardActionArea, Typography } from '@mui/material';
 
 function Request(props) {
     const formatDate = (date) => {
@@ -22,6 +22,17 @@ function Request(props) {
                     <Typography variant="body2"><b>Posted: </b>{formatDate(props.posted.toDate())}</Typography>
                 </CardContent>
             </CardActionArea>
+            <CardActions>
+                <Button 
+                    size="small" 
+                    color="primary"
+                    onClick={() => {
+                        alert('clicked'); //replace with firebase request
+                    }}
+                >
+                cancel
+                </Button>
+            </CardActions>
         </Card>
     );
 }

@@ -1,15 +1,6 @@
 import {useState} from 'react';
 import {db} from '../config.js';
-import {collection, addDoc, Timestamp} from 'firebase/firestore';
-
-const requestTemplate = {
-  "title": "",
-  "desc": "",
-  "requester": "",
-  "status": null,
-  "priority": "",
-  "time": null
-};
+import {collection, doc, setDoc, Timestamp} from 'firebase/firestore';
 
 const PostRequest = () => {
   // const [req, setReq] = useState(requestTemplate);
@@ -27,7 +18,9 @@ const PostRequest = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const docRef = await addDoc(collection(db, "borrowrequests"), {
+    const docRef = doc(collection(db, "borrowrequests"));
+    await setDoc(docRef, {
+      id: docRef.id,
       title: title,
       desc: desc,
       location: location,
