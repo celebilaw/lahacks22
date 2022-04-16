@@ -1,7 +1,10 @@
+import HomePage from './HomePage'
+
+
 const MainPage = () => {
         return (
             <div>
-                Main Tasks Page
+            <HomePage />
             </div>
         )
 }
