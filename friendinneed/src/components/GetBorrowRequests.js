@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
-import {collection, query, orderBy, onSnapshot} from "firebase/firestore";
+// import {doc, collection, query, orderBy, onSnapshot} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import {db} from '../config.js';
 import Request from './Request.js';
 import PostRequest from './PostRequest.js';
@@ -8,15 +9,25 @@ const BorrowRequests = () => {
   const [openAddModal, setOpenAddModal] = useState(false)
   const [borrowReqs, setBorrowReqs] = useState([])
 
+
+
   useEffect(() => {
-    const borrowRequestsRef = query(collection(db, 'borrow-requests'), orderBy('status', 'priority'))
-    onSnapshot(borrowRequestsRef, (snapshot) => {
-      setBorrowReqs(snapshot.docs.map(doc => ({
+    async function fetchData() {
+      const querySnapshot = await getDocs(collection(db, "borrowrequests"));
+      // querySnapshot.forEach((doc) => {
+      //   // doc.data() is never undefined for query doc snapshots
+      //   console.log(doc.id, " => ", doc.data());
+      // });
+      setBorrowReqs(querySnapshot.docs.map(doc => ({
         id: doc.id,
         data: doc.data()
-      })))
-    })
+      })));
+    }
+    fetchData();
   },[])
+
+
+ 
 
   return (
     <div>
