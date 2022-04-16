@@ -20,11 +20,11 @@ const PostRequest = () => {
   const [item, setItem] = useState("");
   const [description, setDescription] = useState("");
   const [urgency, setUrgency] = useState("");
-  const [loc, setLoc] = useState("");
+  const [location, setLocation] = useState("");
 
   const handleSubmit = async (e) => {
     // Do some checks to ensure no blank fields are submitted
-    if (item === "" || description === "" || loc === "" || urgency === "") {
+    if (item === "" || description === "" || location === "" || urgency === "") {
       return;
     }
 
@@ -34,10 +34,10 @@ const PostRequest = () => {
       id: docRef.id,
       item: item,
       description: description,
-      location: loc,
+      location: location,
       requester: "sudoUser",//replace with auth user
       posted: Timestamp.now(),
-      priority: urgency,
+      urgency: urgency,
       status: 0
     });
     console.log("Document written with ID: ", docRef.id);//TODO: REMOVE IN PROD
@@ -45,7 +45,7 @@ const PostRequest = () => {
     // Clear form elements when user submits
     setItem("");
     setUrgency("");
-    setLoc("");
+    setLocation("");
 
     // Close new request form when user clicks submit
     document.getElementById("request-form").classList.toggle("show");
@@ -55,7 +55,7 @@ const PostRequest = () => {
     // Clear form elements when user cancels
     setItem("");
     setUrgency("");
-    setLoc("");
+    setLocation("");
     document.getElementById("request-form").classList.toggle("show");
   }
 
@@ -99,8 +99,8 @@ const PostRequest = () => {
 
         <TextField
           id="LocationLabel"
-          value={loc}
-          onChange={(e) => {setLoc(e.target.value)}}
+          value={location}
+          onChange={(e) => {setLocation(e.target.value)}}
           select
           label="Place">
           {landmarks.map(place => <MenuItem value={place} key={place}>{place}</MenuItem>)}
