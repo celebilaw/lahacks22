@@ -12,11 +12,19 @@ import TextField from '@mui/material/TextField';
 import { MenuItem } from '@mui/material';
 import '@fontsource/patua-one';
 import "../css/Navbar.css";
-import {db} from '../config.js';
+import {auth, db} from '../config.js';
 import {collection, addDoc, Timestamp} from 'firebase/firestore';
-
+const user = auth.currentUser;
 const Navbar = () => {
 
+    let [name, setName] = useState('');
+    if (user) {
+        console.log(user.displayName);
+        setName(user.displayName);
+    } else {
+        console.log('user null');
+    // No user is signed in.
+    }
     let [item, setItem] = useState("");
     let [description, setDescription] = useState("");
     let [urgency, setUrgency] = useState("");
@@ -53,7 +61,7 @@ const Navbar = () => {
             title: item,
             desc: description,
             location: loc,
-            requester: "sudoUser",//replace with auth user
+            requester: name,//replace with auth user
             posted: Timestamp.now(),
             priority: urgency,
             status: 0
