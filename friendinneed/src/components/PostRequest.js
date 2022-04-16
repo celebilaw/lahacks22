@@ -17,26 +17,10 @@ import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
 const PostRequest = () => {
 
-  let [item, setItem] = useState("");
-  let [description, setDescription] = useState("");
-  let [urgency, setUrgency] = useState("");
-  let [loc, setLoc] = useState("");
-
-  const handleItemChange = (e) => {
-    setItem(e.target.value);
-  }
-
-  const handleDescChange = (e) => {
-    setDescription(e.target.value);
-  }
-
-  const handleUrgencyChange = (e) => {
-    setUrgency(e.target.value);
-  }
-
-  const handleLocChange = (e) => {
-    setLoc(e.target.value);
-  }
+  const [item, setItem] = useState("");
+  const [description, setDescription] = useState("");
+  const [urgency, setUrgency] = useState("");
+  const [loc, setLoc] = useState("");
 
   const handleSubmit = async (e) => {
     // Do some checks to ensure no blank fields are submitted
@@ -45,10 +29,12 @@ const PostRequest = () => {
     }
 
     e.preventDefault();
-    const docRef = await addDoc(collection(db, "borrowrequests"), {
-      title: item,
-      desc: description,
-      location: loc,
+    const docRef = doc(collection(db, "borrowrequests"));
+    await setDoc(docRef, {
+      id: docRef.id,
+      title: title,
+      desc: desc,
+      location: location,
       requester: "sudoUser",//replace with auth user
       posted: Timestamp.now(),
       priority: urgency,
@@ -89,13 +75,13 @@ const PostRequest = () => {
         autoComplete="off"
         className="RequestForm"
       >
-        <TextField label="Item" variant="outlined" value={item} onChange={handleItemChange} />
-        <TextField label="Description" variant="outlined" value={description} onChange={handleDescChange} />
+        <TextField label="Item" variant="outlined" value={item} onChange={setItem} />
+        <TextField label="Description" variant="outlined" value={description} onChange={setDescription} />
 
         <TextField
           id="UrgencyLabel"
           value={urgency}
-          onChange={handleUrgencyChange}
+          onChange={setUrgency}
           select
           label="Urgency">
           {urgencies.map(u => <MenuItem value={u} key={u}>{u}</MenuItem>)}

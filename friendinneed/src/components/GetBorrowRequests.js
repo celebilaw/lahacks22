@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 // import {doc, collection, query, orderBy, onSnapshot} from "firebase/firestore";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import {db} from '../config.js';
 import Request from './Request.js';
 import PostRequest from './PostRequest.js';
@@ -9,11 +9,22 @@ const BorrowRequests = () => {
   const [openAddModal, setOpenAddModal] = useState(false)
   const [borrowReqs, setBorrowReqs] = useState([])
 
+  const cancelRequest = async (id) => {
+    const docRef = doc(db, "borrowrequests", id);
+    await deleteDoc(docRef);
+  }
 
+  const completeRequest = async (id) => {
+    const docRef = doc(db, "borrowrequests", id);
+    await updateDoc(docRef, {
+      status: 2
+    });
+  }
 
   useEffect(() => {
     async function fetchData() {
-      const querySnapshot = await getDocs(collection(db, "borrowrequests"));
+      const q = query(collection(db, "borrowrequests"), where("status", "!=", 2));
+      const querySnapshot = await getDocs(q);
       // querySnapshot.forEach((doc) => {
       //   // doc.data() is never undefined for query doc snapshots
       //   console.log(doc.id, " => ", doc.data());
@@ -45,6 +56,8 @@ const BorrowRequests = () => {
           priority={req.data.priority}
           posted={req.data.posted}
           location={req.data.location}
+          cancelRequest={cancelRequest}
+          completeRequest={completeRequest}
         />
       ))}
     </div>
