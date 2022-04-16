@@ -32,7 +32,8 @@ const BorrowRequests = () => {
           fulfiller={req.data.fulfiller}
           status={req.data.status}
           priority={req.data.priority}
-          time={req.data.time}
+          posted={req.data.posted}
+          location={req.data.location}
         />
       ))}
     </div>
