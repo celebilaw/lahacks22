@@ -30,12 +30,12 @@ function HomePage() {
         <Request
           id={req.id}
           key={req.id}
-          title={req.data.title} 
-          desc={req.data.desc}
+          item={req.data.item} 
+          description={req.data.description}
           requester={req.data.requester}
           fulfiller={req.data.fulfiller}
           status={req.data.status}
-          priority={req.data.priority}
+          urgency={req.data.urgency}
           posted={req.data.posted}
           location={req.data.location}
         />
