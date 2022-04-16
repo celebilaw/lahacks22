@@ -5,6 +5,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import Stack from '@mui/material/Stack';
+import {Link} from 'react-router-dom';
+import "../css/Navbar.css";
 
 const Navbar = () => {
     return (
@@ -15,15 +18,25 @@ const Navbar = () => {
                         size="large"
                         edge="start"
                         color="inherit"
-                        aria-label="menu"
+                        aria-label="logo"
                         sx={{ mr: 2}}
                     >
+                        {/* friendInNeed Logo */}
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
-                        Tasks
+                        <Button variant="text">
+                            <Link className="navLink navTitle" to="/">friend in need</Link>
+                        </Button>
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    <Stack direction="row" spacing={2}>
+                        <Button variant="text">
+                            <Link className="navLink" color="inherit" to="/login">About Us</Link>
+                        </Button>
+                        <Button variant="contained" style={{backgroundColor: "#fcc200"}}>
+                            <Link className="navLink" color="inherit" to="/register">Request an Item</Link>
+                        </Button>
+                    </Stack>
                 </Toolbar>
             </AppBar>
         </Box>
