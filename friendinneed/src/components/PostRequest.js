@@ -26,21 +26,17 @@ const PostRequest = () => {
   const [location, setLocation] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      await addDoc(collection(db, 'borrow-requests'), {
-        title: title,
-        desc: desc,
-        location: location,
-        requester: "sudoUser",//replace with auth user
-        posted: Timestamp.now(),
-        priority: priority,
-        status: 0
-      })
-      // onClose()
-    } catch (err) {
-      alert(err)
-    }
+    e.preventDefault();
+    const docRef = await addDoc(collection(db, "borrowrequests"), {
+      title: title,
+      desc: desc,
+      location: location,
+      requester: "sudoUser",//replace with auth user
+      posted: Timestamp.now(),
+      priority: priority,
+      status: 0
+    });
+    console.log("Document written with ID: ", docRef.id);//TODO: REMOVE IN PROD
   }
 
   return (
