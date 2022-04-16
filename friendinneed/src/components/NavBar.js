@@ -12,6 +12,8 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import { MenuItem } from '@mui/material';
 import "../css/Navbar.css";
+import {db} from '../config.js';
+import {collection, addDoc, Timestamp} from 'firebase/firestore';
 
 const Navbar = () => {
 
@@ -40,9 +42,23 @@ const Navbar = () => {
         setLoc(e.target.value);
     }
 
-    const handleSubmit = (e) => {
-        //TODO: Do some checks to ensure no blank fields are submitted
-        console.log(item, urgency, loc);
+    const handleSubmit = async (e) => {
+        // Do some checks to ensure no blank fields are submitted
+        if(item === "" || description === "" || loc === "" || urgency === ""){
+            return;
+        }
+
+        e.preventDefault();
+        const docRef = await addDoc(collection(db, "borrowrequests"), {
+            title: item,
+            desc: description,
+            location: loc,
+            requester: "sudoUser",//replace with auth user
+            posted: Timestamp.now(),
+            priority: urgency,
+            status: 0
+        });
+        console.log("Document written with ID: ", docRef.id);//TODO: REMOVE IN PROD
 
         // Clear form elements when user submits
         setItem("");
