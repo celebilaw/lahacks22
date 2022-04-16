@@ -1,14 +1,13 @@
-import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useReducer, useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import MainPage from './components/MainPage'
-import UserProfile from "./components/UserProfile.js";
-import Login from "./components/Login.js";
-import Register from "./components/Register.js";
-import Navbar from "./components/NavBar.js";
-import BorrowRequests from "./components/GetBorrowRequests.js";
-import {onAuthStateChanged, getAuth} from 'firebase/auth'
-const auth = getAuth()
+import HomePage from './components/HomePage'
+import UserProfile from './components/UserProfile.js';
+import Login from './components/Login.js';
+import Register from './components/Register.js';
+import Navbar from './components/NavBar.js';
+import { auth } from'./config';
+import {onAuthStateChanged} from 'firebase/auth';
 function App() {
   let [loggedin, setLoggedin] = useState(0);
   onAuthStateChanged(auth, (user) => {
@@ -21,18 +20,16 @@ function App() {
     } else {
     }
   });
-
-
   return (
     <BrowserRouter>
       <div>
         <Navbar />
         <Routes>
-          <Route path="/" element={loggedin ? <MainPage /> : <Login /> } />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/user-profile" element={<UserProfile />} />
-          <Route path="/get-borrow-requests" element={<BorrowRequests />} />
+          <Route path='/' element={loggedin ? <HomePage /> : <Login /> } />
+          <Route path='/about' element={<Login />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/user-profile' element={<UserProfile />} />
         </Routes>
       </div>
     </BrowserRouter>
