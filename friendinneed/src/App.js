@@ -7,6 +7,7 @@ import UserProfile from "./components/UserProfile.js";
 import Login from "./components/Login.js";
 import Register from "./components/Register.js";
 import Navbar from "./components/NavBar.js";
+import BorrowRequests from "./components/GetBorrowRequests.js";
 
 function App() {
   //const [user] = useAuthState(auth);
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/user-profile" element={<UserProfile />} />
+          <Route path="/get-borrow-requests" element={<BorrowRequests />} />
         </Routes>
       </div>
     </BrowserRouter>

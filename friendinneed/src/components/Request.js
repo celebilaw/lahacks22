@@ -6,6 +6,9 @@ import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea, Typography } from '@mui/material';
 
 function Request(props) {
+    const formatDate = (date) => {
+        return date.toISOString().split('T')[0]
+    }
 
     return (
         <Card>
@@ -14,7 +17,9 @@ function Request(props) {
                     <Typography variant="h5" component="div">{props.title}</Typography>
                     <Typography variant="body1">{props.desc}</Typography>
                     <Typography variant="body2"><b>Requester: </b>{props.requester}</Typography>
-                    <Typography variant="body2"><b>Requester: </b>{props.status}</Typography>
+                    <Typography variant="body2"><b>Priority: </b>{props.priority}</Typography>
+                    <Typography variant="body2"><b>Location: </b>{props.location}</Typography>
+                    <Typography variant="body2"><b>Posted: </b>{formatDate(props.posted.toDate())}</Typography>
                 </CardContent>
             </CardActionArea>
         </Card>
