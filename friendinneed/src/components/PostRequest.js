@@ -13,7 +13,7 @@ import TextField from '@mui/material/TextField';
 import { MenuItem } from '@mui/material';
 import "../css/Navbar.css";
 import { db } from '../config.js';
-import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { collection, Timestamp, doc, setDoc } from 'firebase/firestore';
 
 const PostRequest = () => {
 
@@ -32,9 +32,9 @@ const PostRequest = () => {
     const docRef = doc(collection(db, "borrowrequests"));
     await setDoc(docRef, {
       id: docRef.id,
-      title: title,
-      desc: desc,
-      location: location,
+      item: item,
+      description: description,
+      location: loc,
       requester: "sudoUser",//replace with auth user
       posted: Timestamp.now(),
       priority: urgency,
@@ -75,13 +75,23 @@ const PostRequest = () => {
         autoComplete="off"
         className="RequestForm"
       >
-        <TextField label="Item" variant="outlined" value={item} onChange={setItem} />
-        <TextField label="Description" variant="outlined" value={description} onChange={setDescription} />
+        <TextField 
+          label="Item" 
+          variant="outlined" 
+          value={item} 
+          onChange={(e) => {setItem(e.target.value)}}
+        />
+        <TextField 
+          label="Description" 
+          variant="outlined" 
+          value={description} 
+          onChange={(e) => {setDescription(e.target.value)}} 
+        />
 
         <TextField
           id="UrgencyLabel"
           value={urgency}
-          onChange={setUrgency}
+          onChange={(e) => {setUrgency(e.target.value)}}
           select
           label="Urgency">
           {urgencies.map(u => <MenuItem value={u} key={u}>{u}</MenuItem>)}
@@ -90,7 +100,7 @@ const PostRequest = () => {
         <TextField
           id="LocationLabel"
           value={loc}
-          onChange={handleLocChange}
+          onChange={(e) => {setLoc(e.target.value)}}
           select
           label="Place">
           {landmarks.map(place => <MenuItem value={place} key={place}>{place}</MenuItem>)}
