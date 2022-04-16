@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 import HomePage from './components/HomePage'
 
@@ -10,16 +10,13 @@ import Register from "./components/register.js";
 import Navbar from "./components/navbar.js";
 
 // Import the functions you need from the SDKs you need
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
-import 'firebase/compat/auth';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore'; 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#avai lable-libraries
+// import firebase from 'firebase/compat/app';
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore"; 
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// TODO: Replace the following with your app's Firebase project configuration
+// See: https://firebase.google.com/docs/web/learn-more#config-object
 const firebaseConfig = {
   apiKey: "AIzaSyArarzmzNg3mU5MVBHWrDpCBzdrtUyboZw",
   authDomain: "friend-in-need-a2242.firebaseapp.com",
@@ -31,30 +28,39 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const firestore = firebase.firestore();
+const app = initializeApp(firebaseConfig);
+
+
+// // Initialize Cloud Firestore and get a reference to the service
+// const db = getFirestore(app);
+// async function test () {
+// try {
+//   const docRef = await addDoc(collection(db, "users"), {
+//     first: "Ada",
+//     last: "Lovelace",
+//     born: 1815
+//   });
+//   console.log("Document written with ID: ", docRef.id);
+// } catch (e) {
+//   console.error("Error adding document: ", e);
+// }
+// }
 
 function App() {
-  const [user] = useAuthState(auth);
+  //const [user] = useAuthState(auth);
   return (
-    <Router>
+    <BrowserRouter>
       <div>
         <Navbar />
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={1 ? <MainPage /> : <Login /> } />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-            {/* {user ? <ChatRoom /> : <SignIn /> } */}
-          {/* 
-            probably do userprofile by ID? 
-            /userProfile/:id
-          */}
+            
           <Route path="/userProfile" element={<UserProfile />} />
         </Routes>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
-
 export default App;
