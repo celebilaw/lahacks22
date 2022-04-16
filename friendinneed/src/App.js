@@ -1,9 +1,8 @@
 import { useReducer, useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
-import HomePage from './components/HomePage'
+import MainPage from './components/MainPage'
 import UserProfile from "./components/UserProfile.js";
-import MainPage from "./components/MainPage.js";
 import Login from "./components/Login.js";
 import Register from "./components/Register.js";
 import Navbar from "./components/NavBar.js";
