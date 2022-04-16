@@ -1,19 +1,23 @@
 import React from 'react'
 import "./Request.css"
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import { CardActionArea, Typography } from '@mui/material';
 
 function Request(props) {
 
     return (
-        <div className="Container">
-            <div className="RequestCard">
-                <p className="CardTitle">{props.title}</p>
-                <p className="CardDesc">{props.desc}</p>
-                <div className="StatusContainer">
-                    <p className="CardUser"><b>Requester:</b> {props.requester}</p>
-                    <p className="CardStatus"><b>Status:</b> {props.status}</p>
-                </div>
-            </div>
-        </div>
+        <Card >
+            <CardActionArea>
+                <CardContent>
+                    <Typography variant="h5" component="div">{props.title}</Typography>
+                    <Typography variant="body1">{props.desc}</Typography>
+                    <Typography variant="body2"><b>Requester: </b>{props.requester}</Typography>
+                    <Typography variant="body2"><b>Requester: </b>{props.status}</Typography>
+                </CardContent>
+            </CardActionArea>
+        </Card>
     );
 }
 
