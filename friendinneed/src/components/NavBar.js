@@ -1,44 +1,150 @@
+import { useState } from 'react'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import Stack from '@mui/material/Stack';
+import Logo from '../components/icons/logo.svg';
 import { Link } from 'react-router-dom';
-import Logo from './icons/logo.svg';
-import '../css/Navbar.css';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import { MenuItem } from '@mui/material';
 import '@fontsource/patua-one';
+import "../css/Navbar.css";
+import {db} from '../config.js';
+import {collection, addDoc, Timestamp} from 'firebase/firestore';
+
 const Navbar = () => {
+
+    let [item, setItem] = useState("");
+    let [description, setDescription] = useState("");
+    let [urgency, setUrgency] = useState("");
+    let [loc, setLoc] = useState("");
+
+    const handleNewRequest = (e) => {
+        document.getElementById("request-form").classList.toggle("show");
+    }
+
+    const handleItemChange = (e) => {
+        setItem(e.target.value);
+    }
+
+    const handleDescChange = (e) => {
+        setDescription(e.target.value);
+    }
+
+    const handleUrgencyChange = (e) => {
+        setUrgency(e.target.value);
+    }
+
+    const handleLocChange = (e) => {
+        setLoc(e.target.value);
+    }
+
+    const handleSubmit = async (e) => {
+        // Do some checks to ensure no blank fields are submitted
+        if(item === "" || description === "" || loc === "" || urgency === ""){
+            return;
+        }
+
+        e.preventDefault();
+        const docRef = await addDoc(collection(db, "borrowrequests"), {
+            title: item,
+            desc: description,
+            location: loc,
+            requester: "sudoUser",//replace with auth user
+            posted: Timestamp.now(),
+            priority: urgency,
+            status: 0
+        });
+        console.log("Document written with ID: ", docRef.id);//TODO: REMOVE IN PROD
+
+        // Clear form elements when user submits
+        setItem("");
+        setUrgency("");
+        setLoc("");
+
+        // Close new request form when user clicks submit
+        document.getElementById("request-form").classList.toggle("show");
+    }
+
+    const handleCancel = (e) => {
+        // Clear form elements when user cancels
+        setItem("");
+        setUrgency("");
+        setLoc("");
+        document.getElementById("request-form").classList.toggle("show");
+    }
+
+    const urgencies = ["SOS", "Immediate", "Couple Hours", "Days", "Weeks"]
+    const landmarks = ["Powell", "YRL", "Sproul", "Delta Terrace", "Sunset Village", "Rieber", "De Neve", "Olympic", "Centennial", "Ackerman", "Court of Sciences", "Inverted Fountain"].sort() // Sort by alphabetical order
+
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position='static' style={{ background: 'white' }}>
-                <Toolbar>
-                    <IconButton
-                        // size='large'
-                        // edge='start'
-                        // color='inherit'
-                        // aria-label='logo'
-                        // sx={{ mr: 5 }}
-                    >
-                        <Link to='/'>
-                        <img src={Logo} alt='logo' style={{width: 50}}/>
-                        </Link>
-                    </IconButton>
-                    <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+        <div>
+            <Stack
+                id="request-form"
+                component="form"
+                sx={{
+                    width: '25ch'
+                }}
+                spacing={0.5}
+                noValidate
+                autoComplete="off"
+                className="RequestForm"
+            >
+                <TextField label="Item" variant="outlined" value={item} onChange={handleItemChange} />
+                <TextField label="Description" variant="outlined" value={description} onChange={handleDescChange} />
+
+                <TextField
+                    id="UrgencyLabel"
+                    value={urgency}
+                    onChange={handleUrgencyChange}
+                    select
+                    label="Urgency">
+                    {urgencies.map(u => <MenuItem value={u} key={u}>{u}</MenuItem>)}
+                </TextField>
+
+                <TextField
+                    id="LocationLabel"
+                    value={loc}
+                    onChange={handleLocChange}
+                    select
+                    label="Place">
+                    {landmarks.map(place => <MenuItem value={place} key={place}>{place}</MenuItem>)}
+                </TextField>
+
+                <Button onClick={handleSubmit}>Submit Request</Button>
+                <Button onClick={handleCancel}>CANCEL</Button>
+            </Stack>
+
+            <Box sx={{ flexGrow: 1 }}>
+                <AppBar position="static" style={{background: 'white'}}>
+                    <Toolbar>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="logo"
+                            sx={{ mr: 2 }}
+                        >
+                            <img src={Logo} style = {{width: 50}} alt="logo"></img>
+                        </IconButton>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                             <Link className='navTitle' to='/' style={{color: '#337DEF' , fontFamily: 'Patua One'}}>friend in need</Link>
-                    </Typography>
-                    <Stack direction='row' spacing={2}>
-                        <Button variant='text'>
-                            <Link className='navLink' color='inherit' to='/about'>About Us</Link>
-                        </Button>
-                        <Button variant='contained' style={{ backgroundColor: '#FCC200' }}>
-                            <Link className='navLink' color='inherit' to='/register'>Request an Item</Link>
-                        </Button>
-                    </Stack>
-                </Toolbar>
-            </AppBar>
-        </Box>
+                        </Typography>
+                        <Stack direction="row" spacing={2}>
+                            <Button variant="text">
+                                <Link className="navLink" color="inherit" to="/login">About Us</Link>
+                            </Button>
+                            <Button variant="contained" style={{ backgroundColor: "#fcc200" }} onClick={handleNewRequest}>
+                                <txt color="inherit">Request an Item</txt>
+                            </Button>
+                        </Stack>
+                    </Toolbar>
+                </AppBar>
+            </Box>
+        </div>
     )
 }
 export default Navbar;
