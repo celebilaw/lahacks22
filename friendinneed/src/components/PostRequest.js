@@ -3,14 +3,6 @@ import {db} from '../config.js';
 import {collection, doc, setDoc, Timestamp} from 'firebase/firestore';
 
 const PostRequest = () => {
-  // const [req, setReq] = useState(requestTemplate);
-
-  // const handleChange = ({target}) => {
-  //   setReq({
-  //     ...req,
-      
-  //   });
-  // };
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [priority, setPriority] = useState("");

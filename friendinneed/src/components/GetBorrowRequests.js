@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 // import {doc, collection, query, orderBy, onSnapshot} from "firebase/firestore";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, getDoc, updateDoc } from "firebase/firestore";
 import {db} from '../config.js';
 import Request from './Request.js';
 import PostRequest from './PostRequest.js';
@@ -9,8 +9,24 @@ const BorrowRequests = () => {
   const [openAddModal, setOpenAddModal] = useState(false)
   const [borrowReqs, setBorrowReqs] = useState([])
 
-  const cancelRequest = async () => {
+  const cancelRequest = async (id) => {
+    const docRef = doc(db, "borrowrequests", id);
+    const docSnap = await getDoc(docRef);
 
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      //delete the db entries??
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+  }
+
+  const completeRequest = async (id) => {
+    const docRef = doc(db, "borrowrequests", id);
+    await updateDoc(docRef, {
+      status: 2
+    });
   }
 
   useEffect(() => {
@@ -48,6 +64,8 @@ const BorrowRequests = () => {
           priority={req.data.priority}
           posted={req.data.posted}
           location={req.data.location}
+          cancelRequest={cancelRequest}
+          completeRequest={completeRequest}
         />
       ))}
     </div>

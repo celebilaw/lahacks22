@@ -27,10 +27,19 @@ function Request(props) {
                     size="small" 
                     color="primary"
                     onClick={() => {
-                        alert('clicked'); //replace with firebase request
+                        props.cancelRequest(props.id);
                     }}
                 >
                 cancel
+                </Button>
+                <Button 
+                    size="small" 
+                    color="primary"
+                    onClick={() => {
+                        props.completeRequest(props.id);
+                    }}
+                >
+                complete
                 </Button>
             </CardActions>
         </Card>
