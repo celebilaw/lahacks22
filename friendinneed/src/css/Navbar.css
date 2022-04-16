@@ -1,12 +1,23 @@
 .navLink {
     text-decoration: none;
-    color: white;
+    text-transform: none;
+    font-size: 16px;
+    color: black;
+    font-family: 'Patua One';
 }
 
-.navButton {
+/* .navButton {
     color: #FFD700;
-}
+    text-transform: none;
+    font-size: 20px;
+    font-family: 'Patua One';
+
+} */
 
 .navTitle {
-    font-size: 20px;
+    text-decoration: none;
+    text-transform: none;
+    font-size: 24px;
+    color: #337DEF;
+    font-family: 'Patua One';
 }

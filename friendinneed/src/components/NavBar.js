@@ -12,19 +12,35 @@ import TextField from '@mui/material/TextField';
 import { MenuItem } from '@mui/material';
 import '@fontsource/patua-one';
 import "../css/Navbar.css";
-import {auth, db} from '../config.js';
-import {collection, addDoc, Timestamp} from 'firebase/firestore';
-const user = auth.currentUser;
+import { useNavigate } from 'react-router-dom';
+import { auth, db } from '../config.js';
+import { onAuthStateChanged } from 'firebase/auth';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
+// const user = auth.currentUser;
+// let name = ''
+// if(user){
+//     name = user.displayName;
+// }
+let name, uid;
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        // const uid = user.uid;
+        name = user.displayName;
+        uid = user.uid;
+        // ...
+    } else {
+        alert('User not logged in!');
+        let navigate = useNavigate();
+        navigate('/', { replace: true });
+        // User is signed out
+        // ...
+    }
+});
+
 const Navbar = () => {
 
-    let [name, setName] = useState('');
-    if (user) {
-        console.log(user.displayName);
-        setName(user.displayName);
-    } else {
-        console.log('user null');
-    // No user is signed in.
-    }
     let [item, setItem] = useState("");
     let [description, setDescription] = useState("");
     let [urgency, setUrgency] = useState("");
@@ -52,7 +68,8 @@ const Navbar = () => {
 
     const handleSubmit = async (e) => {
         // Do some checks to ensure no blank fields are submitted
-        if(item === "" || description === "" || loc === "" || urgency === ""){
+        if (item === "" || description === "" || loc === "" || urgency === "") {
+            alert('Please fill out all details!');
             return;
         }
 
@@ -64,6 +81,8 @@ const Navbar = () => {
             requester: name,//replace with auth user
             posted: Timestamp.now(),
             priority: urgency,
+            owner: uid,
+            fulfiller: '',
             status: 0
         });
         console.log("Document written with ID: ", docRef.id);//TODO: REMOVE IN PROD
@@ -127,7 +146,7 @@ const Navbar = () => {
             </Stack>
 
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static" style={{background: 'white'}}>
+                <AppBar position="static" style={{ background: 'white' }}>
                     <Toolbar>
                         <IconButton
                             size="large"
@@ -136,16 +155,25 @@ const Navbar = () => {
                             aria-label="logo"
                             sx={{ mr: 2 }}
                         >
-                            <img src={Logo} style = {{width: 50}} alt="logo"></img>
+                            <img src={Logo} style={{ width: 50 }} alt="logo"></img>
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            <Link className='navTitle' to='/' style={{color: '#337DEF' , fontFamily: 'Patua One'}}>friend in need</Link>
+                            <Link className='navTitle' to='/'>friend in need</Link>
                         </Typography>
                         <Stack direction="row" spacing={2}>
                             <Button variant="text">
-                                <Link className="navLink" color="inherit" to="/login">About Us</Link>
+                                <Link className="navLink" color="inherit" to="/login" >User Profile</Link>
                             </Button>
-                            <Button variant="contained" style={{ backgroundColor: "#fcc200" }} onClick={handleNewRequest}>
+                            <Button variant="text">
+                                <Link className="navLink" color="inherit" to="/login" >About Us</Link>
+                            </Button>
+                            <Button variant="contained" onClick={handleNewRequest} 
+                                style={{ 
+                                    textTransform: 'none', 
+                                    backgroundColor: '#fcc200', 
+                                    fontFamily: 'Patua One',
+                                    fontSize: 20,
+                                }}>
                                 <txt color="inherit">Request an Item</txt>
                             </Button>
                         </Stack>
