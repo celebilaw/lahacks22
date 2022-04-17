@@ -14,7 +14,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import ULegend from "./icons/urgency_legend.svg";
 import TextField from '@mui/material/TextField';
 import { MenuItem } from '@mui/material';
-import landmarks from "./places.js"
+import landmarks from "./places.js";
 import '@fontsource/lato';
 
 let name, uid;
