@@ -131,7 +131,7 @@ function HomePage() {
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button className="dialogName" sx={{ fontWeight: "bold", fontSize: 20 }} style={{ backgroundColor: "#FFDE7C" }} onClick={acceptRequest(taskInfo[5])}>Accept</Button>
+                <Button className="dialogName" sx={{ fontWeight: "bold", fontSize: 20 }} style={{ backgroundColor: "#FFDE7C" }} onClick={() => {acceptRequest(taskInfo[5])}}>Accept</Button>
               </DialogActions>
             </Dialog>
           }
