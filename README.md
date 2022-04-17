@@ -1,5 +1,6 @@
 # Friend in Need
 
+Our live [web app](https://celebilaw.github.io/lahacks22)
 Our [Figma](https://www.figma.com/file/ofPCc7tHNW43lKK56T5ANL/Friend-in-Me?node-id=56%3A938)!
 
 ## Inspiration
