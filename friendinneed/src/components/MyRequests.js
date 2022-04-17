@@ -256,7 +256,7 @@ const MyRequests = (props) => {
             >
               Cancel
             </Button>
-            {taskInfo["Identity"] === user.uid &&
+            {taskInfo["FulfillerUid"] !== user.uid &&
               <Button
                 className="dialogName"
                 sx={{ fontWeight: "bold", fontSize: 20 }}
