@@ -62,6 +62,8 @@ const MyRequests = (props) => {
       namePresent(<span></span>)
     }
     handleClickShow();
+    console.log(auth.currentUser.uid);
+    console.log(taskInfo["FulfillerUid"]);
   };
 
   const formatDate = (date) => {
@@ -229,7 +231,7 @@ const MyRequests = (props) => {
             >
               Cancel
             </Button>
-            {auth.currentUser.uid === taskInfo["FulfillerUid"] && 
+            {auth.currentUser.uid !== taskInfo["FulfillerUid"] && 
               <Button
               className="dialogName"
               sx={{ fontWeight: "bold", fontSize: 20 }}
