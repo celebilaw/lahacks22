@@ -17,6 +17,7 @@ import { collection, Timestamp, doc, setDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import landmarks from "./places"
+import urgencies from "./urgencies"
 
 // const user = auth.currentUser;
 // let name = ''
@@ -95,17 +96,12 @@ const PostRequest = (props) => {
     document.getElementById("request-form").classList.toggle("show");
   }
 
-  const urgencies = ["SOS", "Immediate", "Couple Hours", "Days", "Weeks"]
-
   return (
     <div>
       <Stack
         id="request-form"
         component="form"
-        sx={{
-          width: '25ch'
-        }}
-        spacing={0.5}
+        spacing={1}
         noValidate
         autoComplete="off"
         className="RequestForm"
