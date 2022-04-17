@@ -1,6 +1,6 @@
 import { useReducer, useState, createContext } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, where, query } from "firebase/firestore";
 import './App.css';
 import HomePage from './components/HomePage'
 import UserProfile from './components/UserProfile.js';
@@ -28,7 +28,8 @@ function App() {
   const [borrowReqs, setBorrowReqs] = useState([]);
 
   async function fetchData() {
-    const querySnapshot = await getDocs(collection(db, "borrowrequests"));
+    const q = query(collection(db, "borrowrequests"), where("status", "==", 0));
+    const querySnapshot = await getDocs(q);
     setBorrowReqs(querySnapshot.docs.map(doc => ({
       id: doc.id,
       data: doc.data()
