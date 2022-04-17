@@ -40,7 +40,7 @@ const MyRequests = () => {
 
   return(
     <div>
-      <h1>accepted requests</h1>
+      <h1>requests accepted by ucla peeps :)</h1>
       {acceptedRequests.map((req) => (
         <Request
           id={req.id}
