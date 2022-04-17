@@ -1,5 +1,5 @@
 import { useReducer, useState, createContext } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { getDocs, collection, where, query } from "firebase/firestore";
 import './App.css';
 import HomePage from './components/HomePage'
@@ -37,7 +37,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div>
         <Navbar fetchData={fetchData}/>
         <Routes>
@@ -49,7 +49,7 @@ function App() {
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 export default App;
