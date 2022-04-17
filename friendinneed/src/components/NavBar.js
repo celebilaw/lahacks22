@@ -9,7 +9,9 @@ import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import PostRequest from './PostRequest';
 import '@fontsource/patua-one';
+import '@fontsource/lato';
 import "../css/Navbar.css";
+import YellowButton from './YellowButton';
 
 import { borrowReqContext } from "../App";
 
@@ -18,7 +20,6 @@ const Navbar = (props) => {
     const handleNewRequest = (e) => {
         document.getElementById("request-form").classList.toggle("show");
     }
-
     return (
         <div>
             <PostRequest fetchData={props.fetchData} />
@@ -32,19 +33,25 @@ const Navbar = (props) => {
                             aria-label="logo"
                             sx={{ mr: 2 }}
                         >
+                            <Link className='navTitle' to='/'
+                            >
                             <img src={Logo} style={{ width: 50 }} alt="logo"></img>
+                            </Link>
+                            
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            <Link className='navTitle' to='/'>friend in need</Link>
+                            <Link className='navTitle' to='/'>friend </Link>
+                            <Link className='navTitle2' to='/'> in </Link>
+                            <Link className='navTitle' to='/'> need</Link>
                         </Typography>
                         <Stack direction="row" spacing={2}>
                             <Button variant="text">
-                                <Link className="navLink" color="inherit" to="/login" >User Profile</Link>
+                                <Link className="navLink" color="inherit" to="/user-profile" >User Profile</Link>
                             </Button>
                             <Button variant="text">
-                                <Link className="navLink" color="inherit" to="/login" >About Us</Link>
+                                <Link className="navLink" color="inherit" to="/about" >About Us</Link>
                             </Button>
-                            <Button variant="contained" onClick={handleNewRequest} 
+                            {/* <Button variant="contained" onClick={handleNewRequest} 
                                 style={{ 
                                     textTransform: 'none', 
                                     backgroundColor: '#fcc200', 
@@ -52,7 +59,8 @@ const Navbar = (props) => {
                                     fontSize: 20,
                                 }}>
                                 <txt color="inherit">Request an Item</txt>
-                            </Button>
+                            </Button> */}
+                             <YellowButton text={"Request an Item"} variant="contained" onClick={handleNewRequest}/>
                         </Stack>
                     </Toolbar>
                 </AppBar>

@@ -1,47 +1,47 @@
 .welcome {
-    position: absolute;
-    height: 61.52px;
-    left: 59.49%;
-    right: 25.27%;
-    top: calc(50% - 61.52px/2 - 135.71px);
-    
-    font-family: 'Patua One';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 49.8802px;
-    line-height: 61px;
-    
-    color: #000000;
+  position: absolute;
+  height: 61.52px;
+  left: 59.49%;
+  right: 25.27%;
+  top: calc(50% - 61.52px / 2 - 135.71px);
+
+  font-family: "Patua One";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 49.8802px;
+  line-height: 61px;
+
+  color: #000000;
 }
 
 .description {
-    position: absolute;
-    height: 151.3px;
-    left: 59.84%;
-    right: 21.11%;
-    top: calc(50% - 151.3px/2 + 5.62px);
+  position: absolute;
+  height: 151.3px;
+  left: 59.84%;
+  right: 21.11%;
+  top: calc(50% - 151.3px / 2 + 5.62px);
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 19.9521px;
-    line-height: 24px;
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19.9521px;
+  line-height: 24px;
 
-    color: #000000;
+  color: #000000;
 }
 
 .googleButton {
-    position: absolute;
-    height: 29.93px;
-    left: 59.49%;
-    right: 21.92%;
-    top: calc(50% - 29.93px/2 + 117.85px);
+  position: absolute;
+  height: 29.93px;
+  left: 59.49%;
+  right: 21.92%;
+  top: calc(50% - 29.93px / 2 + 117.85px);
 }
 
 .welcomeImage {
-    position: absolute;
-    height: 445.6px;
-    left: 21.04%;
-    right: 46.4%;
-    top: calc(50% - 445.6px/2 - 0.2px);
+  position: absolute;
+  height: 445.6px;
+  left: 21.04%;
+  right: 46.4%;
+  top: calc(50% - 445.6px / 2 - 0.2px);
 }

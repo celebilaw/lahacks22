@@ -13,6 +13,7 @@ import ULegend from "./icons/urgency_legend.svg";
 import TextField from '@mui/material/TextField';
 import { MenuItem } from '@mui/material';
 import landmarks from "./places.js"
+import '@fontsource/lato';
 
 function HomePage(props) {
   if (!landmarks.includes("")) {
