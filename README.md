@@ -1,4 +1,4 @@
-# LA Hacks 2022
+# Friend in Need
 
 Our [Figma](https://www.figma.com/file/ofPCc7tHNW43lKK56T5ANL/Friend-in-Me?node-id=56%3A938)!
 
