@@ -4,7 +4,6 @@ import { db, auth } from '../config';
 import Request from './Request';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import "../css/MyRequests.css";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -154,9 +153,9 @@ const MyRequests = (props) => {
 
 
   return (
-    <Box>
+    <Box sx={{"padding-top": "50px", "padding-bottom": "100px", "padding-left": "100px"}}> 
       <Stack spacing={2}>
-        <div className="tasksSection">
+        <div>
           <h1>Requests I am Completing</h1>
           {myAcceptedRequests.map((req) => (
             <Request
