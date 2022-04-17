@@ -14,12 +14,13 @@ import {onAuthStateChanged} from 'firebase/auth';
 import { db } from "./config";
 
 function App() {
+  let uid;
   let [loggedin, setLoggedin] = useState(0);
   onAuthStateChanged(auth, (user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
+      uid = user.uid;
       setLoggedin(1);
       // ...
     } else {
@@ -29,7 +30,7 @@ function App() {
   const [borrowReqs, setBorrowReqs] = useState([]);
 
   async function fetchData() {
-    const q = query(collection(db, "borrowrequests"), where("status", "==", 0));
+    const q = query(collection(db, "borrowrequests"), where("status", "==", 0));// add perhaps where("owner", "!=", uid)
     const querySnapshot = await getDocs(q);
     setBorrowReqs(querySnapshot.docs.map(doc => ({
       id: doc.id,

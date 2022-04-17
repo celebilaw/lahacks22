@@ -68,7 +68,7 @@ const PostRequest = (props) => {
       urgency: urgency,
       status: 0
     });
-    console.log("Document written with ID: ", docRef.id);//TODO: REMOVE IN PROD
+    // console.log("Document written with ID: ", docRef.id);//TODO: REMOVE IN PROD
 
     // Clear form elements when user submits
     setItem("");

@@ -47,6 +47,9 @@ const Navbar = (props) => {
                             <Button variant="text">
                                 <Link className="navLink" color="inherit" to="/login" >About Us</Link>
                             </Button>
+                            <Button variant="text">
+                                <Link className="navLink" color="inherit" to="/my-requests" >My Requests</Link>
+                            </Button>
                             <Button variant="contained" onClick={handleNewRequest} 
                                 style={{ 
                                     textTransform: 'none', 

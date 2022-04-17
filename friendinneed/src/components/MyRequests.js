@@ -9,7 +9,7 @@ const MyRequests = () => {
   const [acceptedRequests, setAcceptedRequests] = useState([]);
   const [myAcceptedRequests, setMyAcceptedRequests] = useState([]);
   const user = auth.currentUser;
-  console.log(user);
+  // console.log(user);
 
   const fetchPendingRequestsForUser = async () => {
 
