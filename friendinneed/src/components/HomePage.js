@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { collection, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-import {db} from '../config.js';
+import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { db } from '../config.js';
 import "./HomePage.css";
 import Request from "./Request";
 import Button from '@mui/material/Button';
@@ -11,9 +11,10 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import '@fontsource/patua-one';
 import "@fontsource/lato";
+import ULegend from "./icons/urgency_legend.svg";
 
 function HomePage() {
-  
+
   const [borrowReqs, setBorrowReqs] = useState([]);
   const [show, setShow] = React.useState(false);
 
@@ -29,13 +30,20 @@ function HomePage() {
   const [date, convertDate] = useState("");
 
   const taskAssembly = (res) => {
-    setTaskInfo([res.data.item, res.data.description, 
-      res.data.requester, res.data.location, date, res.id])
+    setTaskInfo([res.data.item, res.data.description,
+    res.data.requester, res.data.location, date, res.id])
+  }
+
+  const makeTask = (res) => {
+    taskAssembly(res);
+    handleClickShow();
+    convertDate(formatDate(res.data.posted)); // need to fix
   }
 
   const cancelRequest = async (id) => {
     const docRef = doc(db, "borrowrequests", id);
     await deleteDoc(docRef);
+    window.location.reload(true);
   }
 
   const acceptRequest = async (id) => {
@@ -43,6 +51,7 @@ function HomePage() {
     await updateDoc(docRef, {
       status: 1
     });
+    window.location.reload(true);
   }
 
   const completeRequest = async (id) => {
@@ -50,12 +59,7 @@ function HomePage() {
     await updateDoc(docRef, {
       status: 2
     });
-  }
-
-  const makeTask = (res) => {
-    taskAssembly(res);
-    handleClickShow();
-    convertDate(formatDate(res.data.posted)); // need to fix
+    window.location.reload(true);
   }
 
   const formatDate = (date) => {
@@ -78,55 +82,63 @@ function HomePage() {
   }, []);
 
   return (
-    <div>
-      <div className="RequestCards">
-        {borrowReqs.map((req) => (
-        <Request
-          id={req.id}
-          key={req.id}
-          item={req.data.item} 
-          description={req.data.description}
-          requester={req.data.requester}
-          fulfiller={req.data.fulfiller}
-          status={req.data.status}
-          urgency={req.data.urgency}
-          posted={req.data.posted}
-          location={req.data.location}
-          onClick={() => makeTask(req)}
-          cancelRequest={cancelRequest}
-          acceptRequest={acceptRequest}
-          completeRequest={completeRequest}
-        />
-      ))}
-      {show && 
-        <Dialog open={show} onClose={handleClickClose} fullWidth maxWidth="sm">
-          <DialogTitle sx={{ fontWeight: "bold", fontSize: 35 }}>
-            <span className="dialogTitle">
-              {taskInfo[0]}
-            </span>
-            &nbsp;-&nbsp;
-            <span className="dialogName">
-              {taskInfo[2]}
-            </span> 
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText sx={{ fontSize: 25 }}>
-              {taskInfo[1]}
-            </DialogContentText>
-            <br />
-            <br/>
-            <DialogContentText textAlign="right" sx={{ fontSize: 18 }}>
-              Location : {taskInfo[3]}
-            </DialogContentText>
-            <DialogContentText textAlign="right" sx={{ fontSize: 18 }}>
-              Posted : {taskInfo[4]}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button className="dialogName" sx={{ fontWeight: "bold", fontSize: 20 }} style={{backgroundColor: "#FFDE7C"}} onClick={acceptRequest(taskInfo[5])}>Accept</Button>
-          </DialogActions>
-        </Dialog>
-      }
+    <div className="HomeContainer">
+      <div className="LeftSide">
+        <h1>Current<br />Requests</h1>
+        <img src={ULegend} alt="Urgency Legend" />
+      </div>
+
+      <div className="RightSide">
+        <div className="RequestCards">
+          {borrowReqs.map((req) => (
+            <Request
+              id={req.id}
+              key={req.id}
+              item={req.data.item}
+              description={req.data.description}
+              requester={req.data.requester}
+              fulfiller={req.data.fulfiller}
+              status={req.data.status}
+              urgency={req.data.urgency}
+              posted={req.data.posted}
+              location={req.data.location}
+              onClick={() => makeTask(req)}
+              cancelRequest={cancelRequest}
+              acceptRequest={acceptRequest}
+              completeRequest={completeRequest}
+            />
+          ))}
+          {show &&
+            <Dialog open={show} onClose={handleClickClose} fullWidth maxWidth="sm">
+              <DialogTitle sx={{ fontWeight: "bold", fontSize: 35 }}>
+                <span className="dialogTitle">
+                  {taskInfo[0]}
+                </span>
+                &nbsp;-&nbsp;
+                <span className="dialogName">
+                  {taskInfo[2]}
+                </span>
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText sx={{ fontSize: 25 }}>
+                  {taskInfo[1]}
+                </DialogContentText>
+                <br />
+                <br />
+                <DialogContentText textAlign="right" sx={{ fontSize: 18 }}>
+                  Location : {taskInfo[3]}
+                </DialogContentText>
+                <DialogContentText textAlign="right" sx={{ fontSize: 18 }}>
+                  Posted : {taskInfo[4]}
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button className="dialogName" sx={{ fontWeight: "bold", fontSize: 20 }} style={{ backgroundColor: "#FFDE7C" }} onClick={() => {acceptRequest(taskInfo[5])}}>Accept</Button>
+              </DialogActions>
+            </Dialog>
+          }
+
+        </div>
       </div>
     </div>
   );
