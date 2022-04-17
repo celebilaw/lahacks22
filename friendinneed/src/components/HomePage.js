@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, doc, deleteDoc, updateDoc, increment } from "firebase/firestore";
 import { db, auth } from '../config.js';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -82,6 +82,17 @@ function HomePage(props) {
     await updateDoc(docRef, {
       status: 2
     });
+    
+    const borrowerRef = doc(db, "user-profiles", uid);
+    await updateDoc(borrowerRef, {
+      items_borrowed: increment(1)
+    });
+
+    const lenderRef = doc(db, "user-profiles", docRef.fulfiller);
+    await updateDoc(lenderRef, {
+      items_lended: increment(1)
+    });
+
     props.fetchData();
   }
 

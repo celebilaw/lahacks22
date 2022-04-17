@@ -84,9 +84,8 @@ const MyRequests = () => {
           posted={req.data.posted}
           location={req.data.location}
           // onClick={() => makeTask(req)}
-          // cancelRequest={cancelRequest}
-          // acceptRequest={acceptRequest}
-          // completeRequest={completeRequest}
+          // cancelRequest={props.cancelRequest}
+          // completeRequest={props.completeRequest}
         />
       ))}
       <h1>pending requests</h1>
