@@ -53,7 +53,7 @@ function HomePage(props) {
   const makeTask = (res) => {
     taskAssembly(res);
     handleClickShow();
-    convertDate(formatDate(res.data.posted)); // need to fix
+    convertDate(formatDate(res.data.posted.toDate())); // need to fix
   }
 
   const cancelRequest = async (id) => {
