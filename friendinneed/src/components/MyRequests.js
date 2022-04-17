@@ -51,12 +51,29 @@ const MyRequests = (props) => {
       "FulfillerEmail": res.data.fulfilleremail,
       "RequesterEmail": res.data.requesteremail,
       "Type": type,
+      "FulfillerUid": res.data.fulfiller,
     });
   };
 
+  const [Name, namePresent] = useState(<span></span>);
+
   const makeTask = (res, type) => {
     taskAssembly(res, type);
+    if (type === 0)
+    {
+      namePresent(
+        <DialogContentText textAlign="right" sx={{ fontSize: 18 }}>
+          Fulfiller : {res.data.fulfillername}
+        </DialogContentText>
+      );
+    }
+    else
+    {
+      namePresent(<span></span>)
+    }
     handleClickShow();
+    console.log(auth.currentUser.uid);
+    console.log(taskInfo["FulfillerUid"]);
   };
 
   const formatDate = (date) => {
@@ -99,6 +116,9 @@ const MyRequests = (props) => {
     })
     props.fetchData();
     setShow(false);
+    setPendingRequests(pendingRequests.filter((r) => r.id!=id));
+    setAcceptedRequests(acceptedRequests.filter((r) => r.id!=id));
+    setMyAcceptedRequests(myAcceptedRequests.filter((r) => r.id!=id));
   };
 
   const cancelRequest = async (id) => {
@@ -117,6 +137,11 @@ const MyRequests = (props) => {
     }
     props.fetchData();
     setShow(false);
+    setPendingRequests(pendingRequests.filter((r) => r.id!=id));
+    setAcceptedRequests(acceptedRequests.filter((r) => r.id!=id));
+    setMyAcceptedRequests(myAcceptedRequests.filter((r) => r.id!=id));
+
+    // window.location.reload(true);
   };
 
   useEffect(() => {
@@ -132,7 +157,7 @@ const MyRequests = (props) => {
     <Box>
       <Stack spacing={2}>
         <div className="tasksSection">
-          <h1>Requests Assigned To Me</h1>
+          <h1>Requests I am Completing</h1>
           {myAcceptedRequests.map((req) => (
             <Request
               id={req.id}
@@ -152,7 +177,7 @@ const MyRequests = (props) => {
           ))}
         </div>
         <div className="tasksSection">
-          <h1>My In Progress Requests</h1>
+          <h1>My Requests In Progress</h1>
           {acceptedRequests.map((req) => (
             <Request
               id={req.id}
@@ -165,9 +190,10 @@ const MyRequests = (props) => {
               urgency={req.data.urgency}
               posted={req.data.posted}
               location={req.data.location}
-              onClick={() => makeTask(req, 1)}
-            // cancelRequest={props.cancelRequest}
-            // completeRequest={props.completeRequest}
+              //could be 1s
+              onClick={() => makeTask(req, 0)}
+              // cancelRequest={props.cancelRequest}
+              // completeRequest={props.completeRequest}
             />
           ))}
         </div>
@@ -185,9 +211,10 @@ const MyRequests = (props) => {
               urgency={req.data.urgency}
               posted={req.data.posted}
               location={req.data.location}
-              onClick={() => makeTask(req, 0)}
-            // cancelRequest={cancelRequest}
-            // completeRequest={completeRequest}
+              //could be 0s
+              onClick={() => makeTask(req, 1)}
+              // cancelRequest={cancelRequest}
+              // completeRequest={completeRequest}
             />
           ))}
         </div>
@@ -216,9 +243,7 @@ const MyRequests = (props) => {
             <DialogContentText textAlign="right" sx={{ fontSize: 18 }}>
               Posted : {taskInfo["Date"]}
             </DialogContentText>
-            <DialogContentText textAlign="right" sx={{ fontSize: 18 }}>
-              Fulfiller : {taskInfo["FulfillerName"]}
-            </DialogContentText>
+            {Name}
           </DialogContent>
           <DialogActions>
             <Button
