@@ -15,7 +15,7 @@ function Request(props) {
             <CardActionArea>
                 <CardContent>
                     <Typography variant="h5" component="div">{props.item}</Typography>
-                    <Typography variant="body1">{props.desc}</Typography>
+                    <Typography variant="body1">{props.description}</Typography>
                     <Typography variant="body2"><b>Requester: </b>{props.requester}</Typography>
                     <Typography variant="body2"><b>Urgency: </b>{props.urgency}</Typography>
                     <Typography variant="body2"><b>Location: </b>{props.location}</Typography>

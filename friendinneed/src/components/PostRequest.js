@@ -12,8 +12,32 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import { MenuItem } from '@mui/material';
 import "../css/Navbar.css";
-import { db } from '../config.js';
+import { auth, db } from '../config.js';
 import { collection, Timestamp, doc, setDoc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+// const user = auth.currentUser;
+// let name = ''
+// if(user){
+//     name = user.displayName;
+// }
+let name, uid;
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        // const uid = user.uid;
+        name = user.displayName;
+        uid = user.uid;
+        // ...
+    } else {
+        alert('User not logged in!');
+        let navigate = useNavigate();
+        navigate('/', { replace: true });
+        // User is signed out
+        // ...
+    }
+});
 
 const PostRequest = () => {
 
@@ -35,7 +59,9 @@ const PostRequest = () => {
       item: item,
       description: description,
       location: location,
-      requester: "sudoUser",//replace with auth user
+      owner: uid,
+      requester: name,//replace with auth user
+      fulfiller: '',
       posted: Timestamp.now(),
       urgency: urgency,
       status: 0

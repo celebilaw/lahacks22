@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { collection, getDocs, doc, updateDoc, deleteDoc, query, where } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import {db} from '../config.js';
 import "./HomePage.css";
 import Request from "./Request";
@@ -36,19 +36,7 @@ function HomePage() {
     await deleteDoc(docRef);
   }
 
-  const acceptRequest = async (id) => {
-    const docRef = doc(db, "borrowrequests", id);
-    await updateDoc(docRef, {
-      status: 1
-    });
-  }
-
-  const completeRequest = async (id) => {
-    const docRef = doc(db, "borrowrequests", id);
-    await updateDoc(docRef, {
-      status: 2
-    });
-  }
+  const [borrowReqs, setBorrowReqs] = useState([])
   
   const makeTask = (res) => {
     taskAssembly(res);
@@ -62,8 +50,11 @@ function HomePage() {
 
   useEffect(() => {
     async function fetchData() {
-      const q = query(collection(db, "borrowrequests"), where("status", "!=", 2));
-      const querySnapshot = await getDocs(q);
+      const querySnapshot = await getDocs(collection(db, "borrowrequests"));
+      // querySnapshot.forEach((doc) => {
+      //   // doc.data() is never undefined for query doc snapshots
+      //   console.log(doc.id, " => ", doc.data());
+      // });
       setBorrowReqs(querySnapshot.docs.map(doc => ({
         id: doc.id,
         data: doc.data()

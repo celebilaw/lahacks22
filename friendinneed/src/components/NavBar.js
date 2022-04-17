@@ -7,11 +7,9 @@ import IconButton from '@mui/material/IconButton';
 import Logo from '../components/icons/logo.svg';
 import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
-import { MenuItem } from '@mui/material';
+import PostRequest from './PostRequest';
 import '@fontsource/patua-one';
 import "../css/Navbar.css";
-import PostRequest from './PostRequest';
 
 const Navbar = () => {
 
@@ -23,7 +21,7 @@ const Navbar = () => {
         <div>
             <PostRequest />
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static" style={{background: 'white'}}>
+                <AppBar position="static" style={{ background: 'white' }}>
                     <Toolbar>
                         <IconButton
                             size="large"
@@ -32,16 +30,25 @@ const Navbar = () => {
                             aria-label="logo"
                             sx={{ mr: 2 }}
                         >
-                            <img src={Logo} style = {{width: 50}} alt="logo"></img>
+                            <img src={Logo} style={{ width: 50 }} alt="logo"></img>
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            <Link className='navTitle' to='/' style={{color: '#337DEF' , fontFamily: 'Patua One'}}>friend in need</Link>
+                            <Link className='navTitle' to='/'>friend in need</Link>
                         </Typography>
                         <Stack direction="row" spacing={2}>
                             <Button variant="text">
-                                <Link className="navLink" color="inherit" to="/login">About Us</Link>
+                                <Link className="navLink" color="inherit" to="/login" >User Profile</Link>
                             </Button>
-                            <Button variant="contained" style={{ backgroundColor: "#fcc200" }} onClick={handleNewRequest}>
+                            <Button variant="text">
+                                <Link className="navLink" color="inherit" to="/login" >About Us</Link>
+                            </Button>
+                            <Button variant="contained" onClick={handleNewRequest} 
+                                style={{ 
+                                    textTransform: 'none', 
+                                    backgroundColor: '#fcc200', 
+                                    fontFamily: 'Patua One',
+                                    fontSize: 20,
+                                }}>
                                 <txt color="inherit">Request an Item</txt>
                             </Button>
                         </Stack>

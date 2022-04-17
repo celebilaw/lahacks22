@@ -20,10 +20,11 @@ import Container from '@mui/material/Container';
 //     const credential = GoogleAuthProvider.credentialFromError(error);
 //     // ...
 //   });
-import {auth, provider} from'../config';
+import {auth, provider} from'../config.js';
 import {signInWithPopup, GoogleAuthProvider} from 'firebase/auth';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
+import { collection, addDoc } from 'firebase/firestore';
 const Login = () => {
     let navigate = useNavigate();
     const signInWithGoogle = () => {
@@ -35,8 +36,13 @@ const Login = () => {
                 const token = credential.accessToken;
                 // The signed-in user info.
                 const user = result.user;
-                const name = result.user.displayName;
-                console.log(name);
+                const docRef = addDoc(collection(db, "user-profiles"), {
+                    uid: user.uid,
+                    name: user.displayName,
+                    items_lended: 0,
+                    items_borrowed: 0,
+                    email: user.email
+                });
                 navigate('/', { replace: true });
             }).catch((error) => {
                 // Handle Errors here.
