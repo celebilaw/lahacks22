@@ -10,6 +10,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ULegend from "./icons/urgency_legend.svg";
+import '@fontsource/lato';
 
 function HomePage(props) {
   const [show, setShow] = React.useState(false);
