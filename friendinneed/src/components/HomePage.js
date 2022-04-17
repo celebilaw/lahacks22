@@ -26,6 +26,7 @@ function HomePage() {
   return (
     <div>
       <div className="RequestCards">
+        <h1>Requests</h1>
         {borrowReqs.map((req) => (
         <Request
           id={req.id}

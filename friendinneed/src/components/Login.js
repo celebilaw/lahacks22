@@ -1,6 +1,8 @@
 import GoogleButton from './icons/google-sign-in.svg';
+import WelcomeLogo from './icons/welcome.svg';
+import "../css/Login.css";
 import { auth, provider, db } from '../config.js';
-import {signInWithPopup, GoogleAuthProvider} from 'firebase/auth';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
 import { collection, addDoc } from 'firebase/firestore';
@@ -32,17 +34,25 @@ const Login = () => {
                 // The AuthCredential type that was used.
                 const credential = GoogleAuthProvider.credentialFromError(error);
                 // ...
-                console.error({errorCode, errorMessage})
+                console.error({ errorCode, errorMessage })
             });
-        }
+    }
     return (
         <div>
-            <IconButton onClick={signInWithGoogle}>
-                <img src={GoogleButton} alt='google login' style={{width:400}}></img>
-            </IconButton>
-            <p>
-                hello
-            </p>
+            <img className="welcomeImage" src={WelcomeLogo} alt="Main Welcome Symbol" />
+            <div className="rightContainer">
+                <h2 className="welcome">
+                    Welcome
+                </h2>
+                <p className="description">
+                    Friend in Need is a community-based app to foster communal wellness
+                    and make students’ daily lives easier.
+                </p>
+                <button type="button" onClick={signInWithGoogle}>
+                    <img className="googleButton" src={GoogleButton} alt="google" />
+                </button>
+
+            </div>
         </div>
     )
 }

@@ -37,7 +37,7 @@ const Navbar = () => {
                         </Typography>
                         <Stack direction="row" spacing={2}>
                             <Button variant="text">
-                                <Link className="navLink" color="inherit" to="/login" >User Profile</Link>
+                                <Link className="navLink" color="inherit" to="/user-profile" >User Profile</Link>
                             </Button>
                             <Button variant="text">
                                 <Link className="navLink" color="inherit" to="/login" >About Us</Link>
