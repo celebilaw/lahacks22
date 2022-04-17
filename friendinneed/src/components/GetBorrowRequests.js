@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 // import {doc, collection, query, orderBy, onSnapshot} from "firebase/firestore";
-import { collection, query, where, getDocs, doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, getDoc, updateDoc, deleteDoc, onSnapshot } from "firebase/firestore";
 import {db} from '../config.js';
 import Request from './Request.js';
 import PostRequest from './PostRequest.js';
@@ -12,6 +12,7 @@ const BorrowRequests = () => {
   const cancelRequest = async (id) => {
     const docRef = doc(db, "borrowrequests", id);
     await deleteDoc(docRef);
+    fetchData();
   }
 
   const completeRequest = async (id) => {
@@ -19,21 +20,19 @@ const BorrowRequests = () => {
     await updateDoc(docRef, {
       status: 2
     });
+    fetchData();
+  }
+
+  async function fetchData() {
+    const q = query(collection(db, "borrowrequests"), where("status", "!=", 2));
+    const querySnapshot = await getDocs(q);
+    setBorrowReqs(querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      data: doc.data()
+    })));
   }
 
   useEffect(() => {
-    async function fetchData() {
-      const q = query(collection(db, "borrowrequests"), where("status", "!=", 2));
-      const querySnapshot = await getDocs(q);
-      // querySnapshot.forEach((doc) => {
-      //   // doc.data() is never undefined for query doc snapshots
-      //   console.log(doc.id, " => ", doc.data());
-      // });
-      setBorrowReqs(querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        data: doc.data()
-      })));
-    }
     fetchData();
   },[])
 
@@ -43,7 +42,7 @@ const BorrowRequests = () => {
   return (
     <div>
       <p>hi</p>
-      <PostRequest />
+      <PostRequest fetchData={fetchData} />
       {borrowReqs.map((req) => (
         <Request
           id={req.id}

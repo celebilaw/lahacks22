@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {db} from '../config.js';
 import {collection, doc, setDoc, Timestamp} from 'firebase/firestore';
 
-const PostRequest = () => {
+const PostRequest = (props) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [priority, setPriority] = useState("");
@@ -22,6 +22,7 @@ const PostRequest = () => {
       status: 0
     });
     console.log("Document written with ID: ", docRef.id);//TODO: REMOVE IN PROD
+    props.fetchData();
   }
 
   return (
