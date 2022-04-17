@@ -134,6 +134,7 @@ function HomePage(props) {
         <h1 style={{"line-height": "80%"}}>
           Current Requests
         </h1>
+        <br/><br/>
         <img src={ULegend} alt="Urgency Legend" width="100%" />
         <br />
         <br />
