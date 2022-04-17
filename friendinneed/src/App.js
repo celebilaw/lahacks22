@@ -8,6 +8,7 @@ import Login from './components/Login.js';
 import Register from './components/Register.js';
 import Navbar from './components/NavBar.js';
 import NotFoundPage from './components/NotFoundPage';
+import MyRequests from './components/MyRequests';
 import { auth } from'./config';
 import {onAuthStateChanged} from 'firebase/auth';
 import { db } from "./config";
@@ -46,6 +47,7 @@ function App() {
           <Route path='/about' element={<Login />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/my-requests' element={<MyRequests />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </div>
