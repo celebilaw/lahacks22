@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import {db} from '../config.js';
 import "./HomePage.css";
 import Request from "./Request";
@@ -36,8 +36,20 @@ function HomePage() {
     await deleteDoc(docRef);
   }
 
-  const [borrowReqs, setBorrowReqs] = useState([])
-  
+  const acceptRequest = async (id) => {
+    const docRef = doc(db, "borrowrequests", id);
+    await updateDoc(docRef, {
+      status: 1
+    });
+  }
+
+  const completeRequest = async (id) => {
+    const docRef = doc(db, "borrowrequests", id);
+    await updateDoc(docRef, {
+      status: 2
+    });
+  }
+
   const makeTask = (res) => {
     taskAssembly(res);
     handleClickShow();
