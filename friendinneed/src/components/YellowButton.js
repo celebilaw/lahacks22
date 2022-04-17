@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 
 
-function YellowButton({className, ...props}) {
+function YellowButton({text, className, ...props}) {
         const [selected, setSelected] = useState(false);
     
 
@@ -19,7 +19,7 @@ function YellowButton({className, ...props}) {
     //     console.log({text} + " " + {isClicked});
     // }
     const styles = classNames({
-        "rounded-full h-7 w-80 m-2 bg-light-gold text-black  \
+        "rounded-full h-7 w-60 m-2 bg-light-gold text-black  \
          hover:border-2 hover:border-gold \
          active:bg-gold border-gold \
          focus:shadow-md focus:shadow-light-gray": true,
@@ -37,9 +37,8 @@ function YellowButton({className, ...props}) {
 
     return (
         <div>
-        <button onSubmit={doSubmit} className={styles}>
-            Button
-            </button>
+        <button onSubmit={doSubmit} className={styles} text={text}>
+            {text}</button>
         </div>
     ); 
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classNames from "classnames";
 import google from './icons/google.svg';
 
-function GoogleButton({className, ...props}) {
+function GoogleButton1({className, ...props}) {
         const [selected, setSelected] = useState(false);
     
 
@@ -18,7 +18,7 @@ function GoogleButton({className, ...props}) {
     //     console.log({text} + " " + {isClicked});
     // }
     const styles = classNames({
-        "flex-auto gap-x-5 align-center rounded-full h-7 w-80 m-2 border-2 bg-white border-light-gray text-black \
+        "flex-auto gap-x-5 align-center rounded-full h-7 w-64 m-2 border-2 bg-white border-light-gray text-black \
          hover:border-light-blue \
          active:border-blue \
          focus:shadow-md focus:shadow-light-gray focus:border-blue": true,
@@ -44,4 +44,4 @@ function GoogleButton({className, ...props}) {
     ); 
 }
 
-export default GoogleButton;
+export default GoogleButton1;

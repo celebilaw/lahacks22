@@ -2,8 +2,6 @@ import "../css/AboutUs.css";
 import createdBy from './icons/createdBy.svg';
 import "@fontsource/patua-one";
 import "@fontsource/lato";
-import GoogleButton from "./GoogleButton";
-import YellowButton from "./YellowButton";
 
 const AboutUs = () => {
 
