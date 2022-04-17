@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/lahacks22/static/css/main.471d33fc.css",
-    "main.js": "/lahacks22/static/js/main.80ff16af.js",
-    "static/media/welcome.svg": "/lahacks22/static/media/welcome.16aac6c8a09f82a4971023cdc4bb6844.svg",
-    "static/media/logo.svg": "/lahacks22/static/media/logo.e364f80ff8745280942ed9608c4ae75f.svg",
-    "static/media/urgency_legend.svg": "/lahacks22/static/media/urgency_legend.95f223768b23f6da4e0bad2b838148b3.svg",
-    "static/media/google-sign-in.svg": "/lahacks22/static/media/google-sign-in.09f7ad1183d4daefe002afdd4d90711b.svg",
-    "static/media/patua-one-all-400-normal.woff": "/lahacks22/static/media/patua-one-all-400-normal.d7fc71ce65a6602a99aa.woff",
-    "static/media/patua-one-latin-400-normal.woff2": "/lahacks22/static/media/patua-one-latin-400-normal.dac94378c27d691493d6.woff2",
-    "index.html": "/lahacks22/index.html",
-    "main.471d33fc.css.map": "/lahacks22/static/css/main.471d33fc.css.map",
-    "main.80ff16af.js.map": "/lahacks22/static/js/main.80ff16af.js.map"
+    "main.css": "/friendinneed/static/css/main.4d0efb2c.css",
+    "main.js": "/friendinneed/static/js/main.5a7010b2.js",
+    "static/media/welcome.svg": "/friendinneed/static/media/welcome.16aac6c8a09f82a4971023cdc4bb6844.svg",
+    "static/media/logo.svg": "/friendinneed/static/media/logo.e364f80ff8745280942ed9608c4ae75f.svg",
+    "static/media/urgency_legend.svg": "/friendinneed/static/media/urgency_legend.95f223768b23f6da4e0bad2b838148b3.svg",
+    "static/media/google-sign-in.svg": "/friendinneed/static/media/google-sign-in.09f7ad1183d4daefe002afdd4d90711b.svg",
+    "static/media/patua-one-all-400-normal.woff": "/friendinneed/static/media/patua-one-all-400-normal.d7fc71ce65a6602a99aa.woff",
+    "static/media/patua-one-latin-400-normal.woff2": "/friendinneed/static/media/patua-one-latin-400-normal.dac94378c27d691493d6.woff2",
+    "index.html": "/friendinneed/index.html",
+    "main.4d0efb2c.css.map": "/friendinneed/static/css/main.4d0efb2c.css.map",
+    "main.5a7010b2.js.map": "/friendinneed/static/js/main.5a7010b2.js.map"
   },
   "entrypoints": [
-    "static/css/main.471d33fc.css",
-    "static/js/main.80ff16af.js"
+    "static/css/main.4d0efb2c.css",
+    "static/js/main.5a7010b2.js"
   ]
 }
