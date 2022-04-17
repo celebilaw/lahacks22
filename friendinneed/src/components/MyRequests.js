@@ -103,10 +103,20 @@ const completeRequest = async (id) => {
 
 const cancelRequest = async (id) => {
   const docRef = doc(db, "borrowrequests", id);
-  await deleteDoc(docRef);
+  const docData = await getDoc(docRef);
+  if(user.uid === docData.data().requester){
+    await deleteDoc(docRef);
+  }
+  else{
+    await updateDoc(docRef, {
+      status: 0,
+      fulfiller: '',
+      fulfillername: '',
+      fulfilleremail: '',
+    })
+  }
   props.fetchData();
   setShow(false);
-  // window.location.reload(true);
 };
 
 useEffect(() => {
