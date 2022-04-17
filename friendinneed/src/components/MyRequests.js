@@ -44,8 +44,22 @@ const MyRequests = (props) => {
     });
   };
 
+  const [Name, namePresent] = useState(<span></span>);
+
   const makeTask = (res, type) => {
     taskAssembly(res, type);
+    if (type === 0)
+    {
+      namePresent(
+        <DialogContentText textAlign="right" sx={{ fontSize: 18 }}>
+          Fulfiller : {res.data.fulfillername}
+        </DialogContentText>
+      );
+    }
+    else
+    {
+      namePresent(<span></span>)
+    }
     handleClickShow();
   };
 
@@ -143,7 +157,7 @@ const MyRequests = (props) => {
               urgency={req.data.urgency}
               posted={req.data.posted}
               location={req.data.location}
-              onClick={() => makeTask(req, 1)}
+              onClick={() => makeTask(req, 0)}
               // cancelRequest={props.cancelRequest}
               // completeRequest={props.completeRequest}
             />
@@ -163,7 +177,7 @@ const MyRequests = (props) => {
               urgency={req.data.urgency}
               posted={req.data.posted}
               location={req.data.location}
-              onClick={() => makeTask(req, 0)}
+              onClick={() => makeTask(req, 1)}
               // cancelRequest={cancelRequest}
               // completeRequest={completeRequest}
             />
@@ -194,9 +208,7 @@ const MyRequests = (props) => {
             <DialogContentText textAlign="right" sx={{ fontSize: 18 }}>
               Posted : {taskInfo["Date"]}
             </DialogContentText>
-            <DialogContentText textAlign="right" sx={{ fontSize: 18 }}>
-              Fulfiller : {taskInfo["FulfillerName"]}
-            </DialogContentText>
+            {Name}
           </DialogContent>
           <DialogActions>
             <Button
