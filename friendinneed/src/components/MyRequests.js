@@ -41,6 +41,7 @@ const MyRequests = (props) => {
       "FulfillerEmail": res.data.fulfilleremail,
       "RequesterEmail": res.data.requesteremail,
       "Type": type,
+      "FulfillerUid": res.data.fulfiller,
     });
   };
 
@@ -102,6 +103,8 @@ const MyRequests = (props) => {
     props.fetchData();
     setShow(false);
     setPendingRequests(pendingRequests.filter((r) => r.id!=id));
+    setAcceptedRequests(acceptedRequests.filter((r) => r.id!=id));
+    setMyAcceptedRequests(myAcceptedRequests.filter((r) => r.id!=id));
   };
 
   const cancelRequest = async (id) => {
@@ -109,6 +112,10 @@ const MyRequests = (props) => {
     await deleteDoc(docRef);
     props.fetchData();
     setShow(false);
+    setPendingRequests(pendingRequests.filter((r) => r.id!=id));
+    setAcceptedRequests(acceptedRequests.filter((r) => r.id!=id));
+    setMyAcceptedRequests(myAcceptedRequests.filter((r) => r.id!=id));
+
     // window.location.reload(true);
   };
 
@@ -125,7 +132,7 @@ const MyRequests = (props) => {
     <Box>
       <Stack spacing={2}>
         <div className="tasksSection">
-          <h1>Requests Assigned To Me</h1>
+          <h1>Requests I am Completing</h1>
           {myAcceptedRequests.map((req) => (
             <Request
               id={req.id}
@@ -145,7 +152,7 @@ const MyRequests = (props) => {
           ))}
         </div>
         <div className="tasksSection">
-          <h1>My In Progress Requests</h1>
+          <h1>My Requests In Progress</h1>
           {acceptedRequests.map((req) => (
             <Request
               id={req.id}
@@ -222,16 +229,18 @@ const MyRequests = (props) => {
             >
               Cancel
             </Button>
-            <Button
+            {auth.currentUser.uid === taskInfo["FulfillerUid"] && 
+              <Button
               className="dialogName"
               sx={{ fontWeight: "bold", fontSize: 20 }}
               style={{ backgroundColor: "#FFDE7C" }}
               onClick={() => {
                 completeRequest(taskInfo["Identity"]);
               }}
-            >
-              Complete
-            </Button>
+              >
+                Complete
+              </Button>
+            }
           </DialogActions>
         </Dialog>
       )}
