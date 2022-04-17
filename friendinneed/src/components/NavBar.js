@@ -18,7 +18,6 @@ const Navbar = (props) => {
     const handleNewRequest = (e) => {
         document.getElementById("request-form").classList.toggle("show");
     }
-
     return (
         <div>
             <PostRequest fetchData={props.fetchData} />
@@ -32,14 +31,18 @@ const Navbar = (props) => {
                             aria-label="logo"
                             sx={{ mr: 2 }}
                         >
+                            <Link className='navTitle' to='/'
+                            >
                             <img src={Logo} style={{ width: 50 }} alt="logo"></img>
+                            </Link>
+                            
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                             <Link className='navTitle' to='/'>friend in need</Link>
                         </Typography>
                         <Stack direction="row" spacing={2}>
                             <Button variant="text">
-                                <Link className="navLink" color="inherit" to="/login" >User Profile</Link>
+                                <Link className="navLink" color="inherit" to="/user-profile" >User Profile</Link>
                             </Button>
                             <Button variant="text">
                                 <Link className="navLink" color="inherit" to="/login" >About Us</Link>

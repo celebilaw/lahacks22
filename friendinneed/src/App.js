@@ -44,10 +44,11 @@ function App() {
         <Routes>
           {/* <Route path='/' element={1 ? <HomePage fetchData={fetchData} borrowReqs={borrowReqs} /> : <Login /> } /> */}
           <Route path='/' element={<HomePage fetchData={fetchData} borrowReqs={borrowReqs} /> } />
-          <Route path='/about' element={<Login />} />
+          {/* <Route path='/about' element={<AboutUs />} /> */}
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/my-requests' element={<MyRequests />} />
+          <Route path='/user-profile' element={<UserProfile />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </div>
