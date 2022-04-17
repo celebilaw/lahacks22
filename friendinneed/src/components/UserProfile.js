@@ -5,7 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { db, auth } from '../config.js';
 import CountUp from 'react-countup';
-import ProgressProvider from './progress bar/ProgressProvider';
+import { Circle } from 'rc-progress';
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -26,6 +26,8 @@ onAuthStateChanged(auth, (user) => {
 const UserProfile = () => {
   const user = auth.currentUser;
   const [profile, setProfile] = useState({});
+  const [progress, setProgress] = useState(1);
+  const [index, setIndex] = useState(0);
 
   // function fetchUserData() {
   //   getDoc(docRef).then( (docSnap) => {
@@ -52,6 +54,15 @@ const UserProfile = () => {
         })}
     }, [user]);
 
+    useEffect(() => {
+        if (progress < 100) {
+            setTimeout(() => {
+                setProgress(100*Math.tanh(0.02*index))
+                setIndex((prev) => {return prev + 1;});
+            }, 10);
+        }
+    }, [progress]);
+
 
   return (
     <div>
@@ -62,9 +73,28 @@ const UserProfile = () => {
       
       {/* <CountUp end={profile.items_lended} /> */}
       <h1>
-        <CountUp end={100} duration={5} useEasing={true} />
+        <CountUp 
+            end={100} 
+            duration={5} 
+            useEasing={true} 
+            // onStart={() => {
+            //     const timer = setTimeout(() => {
+            //         setProgress(1);
+            //     }, 1000);
+            //     return () => clearTimeout(timer);
+            // }}
+        />
         items lended: {profile.items_lended}
       </h1>
+        <Circle 
+            percent={progress}
+            strokeWidth="4" 
+            strokeColor="#477BE8" 
+            trailColor="#D3D3D3"
+            trailWidth="4"
+            gapDegree="150"
+            gapPosition="bottom"
+            /> 
       <h1>
         items borrowed: {profile.items_borrowed}
       </h1>
