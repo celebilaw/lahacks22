@@ -3,7 +3,7 @@ import WelcomeLogo from './icons/welcome.svg';
 import "../css/Login.css";
 import { auth, provider, db } from '../config.js';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { collection, addDoc } from 'firebase/firestore';
 const Login = () => {
@@ -40,7 +40,6 @@ const Login = () => {
     return (
         <div>
             <img className="welcomeImage" src={WelcomeLogo} alt="Main Welcome Symbol" />
-            <div className="rightContainer">
                 <h2 className="welcome">
                     Welcome
                 </h2>
@@ -48,11 +47,7 @@ const Login = () => {
                     Friend in Need is a community-based app to foster communal wellness
                     and make students’ daily lives easier.
                 </p>
-                <button type="button" onClick={signInWithGoogle}>
-                    <img className="googleButton" src={GoogleButton} alt="google" />
-                </button>
-
-            </div>
+                <img onClick={signInWithGoogle} className="googleButton" src={GoogleButton} alt="google" />
         </div>
     )
 }
