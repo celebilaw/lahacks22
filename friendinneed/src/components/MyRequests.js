@@ -2,7 +2,9 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { useState, useEffect } from 'react';
 import { db, auth } from '../config';
 import Request from './Request';
-
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import "../css/MyRequests.css";
 
 const MyRequests = () => {
   const [pendingRequests, setPendingRequests] = useState([]);
@@ -49,65 +51,72 @@ const MyRequests = () => {
 
 
   return(
-    <div>
-      <h1>accepted requests</h1>
-      {myAcceptedRequests.map((req) => (
-        <Request
-          id={req.id}
-          key={req.id}
-          item={req.data.item}
-          description={req.data.description}
-          requester={req.data.requester}
-          fulfiller={req.data.fulfiller}
-          status={req.data.status}
-          urgency={req.data.urgency}
-          posted={req.data.posted}
-          location={req.data.location}
-          // onClick={() => makeTask(req)}
-          // cancelRequest={cancelRequest}
-          // acceptRequest={acceptRequest}
-          // completeRequest={completeRequest}
-        />
-      ))}
-
-      <h1>requests accepted by ucla peeps :)</h1>
-      {acceptedRequests.map((req) => (
-        <Request
-          id={req.id}
-          key={req.id}
-          item={req.data.item}
-          description={req.data.description}
-          requester={req.data.requester}
-          fulfiller={req.data.fulfiller}
-          status={req.data.status}
-          urgency={req.data.urgency}
-          posted={req.data.posted}
-          location={req.data.location}
-          // onClick={() => makeTask(req)}
-          // cancelRequest={props.cancelRequest}
-          // completeRequest={props.completeRequest}
-        />
-      ))}
-      <h1>pending requests</h1>
-      {pendingRequests.map((req) => (
-        <Request
-          id={req.id}
-          key={req.id}
-          item={req.data.item}
-          description={req.data.description}
-          requester={req.data.requester}
-          fulfiller={req.data.fulfiller}
-          status={req.data.status}
-          urgency={req.data.urgency}
-          posted={req.data.posted}
-          location={req.data.location}
-          // onClick={() => makeTask(req)}
-          // cancelRequest={cancelRequest}
-          // acceptRequest={acceptRequest}
-          // completeRequest={completeRequest}
-        />
-      ))}
-    </div>
+    <Box>
+      <Stack spacing={2}>
+        <div className="tasksSection">
+          <h1>My Accepted Requests</h1>
+          {myAcceptedRequests.map((req) => (
+            <Request
+              id={req.id}
+              key={req.id}
+              item={req.data.item}
+              description={req.data.description}
+              requester={req.data.requester}
+              fulfiller={req.data.fulfiller}
+              status={req.data.status}
+              urgency={req.data.urgency}
+              posted={req.data.posted}
+              location={req.data.location}
+              // onClick={() => makeTask(req)}
+              // cancelRequest={cancelRequest}
+              // acceptRequest={acceptRequest}
+              // completeRequest={completeRequest}
+            />
+          ))}
+        </div>
+        <div className="tasksSection">
+          <h1>Requests Accepted By Ucla Peeps :)</h1>
+          {acceptedRequests.map((req) => (
+            <Request
+              id={req.id}
+              key={req.id}
+              item={req.data.item}
+              description={req.data.description}
+              requester={req.data.requester}
+              fulfiller={req.data.fulfiller}
+              status={req.data.status}
+              urgency={req.data.urgency}
+              posted={req.data.posted}
+              location={req.data.location}
+              // onClick={() => makeTask(req)}
+              // cancelRequest={props.cancelRequest}
+              // completeRequest={props.completeRequest}
+            />
+          ))}
+        </div>
+        <div className="tasksSection">
+          <h1>My Pending Requests</h1>
+          {pendingRequests.map((req) => (
+            <Request
+              id={req.id}
+              key={req.id}
+              item={req.data.item}
+              description={req.data.description}
+              requester={req.data.requester}
+              fulfiller={req.data.fulfiller}
+              status={req.data.status}
+              urgency={req.data.urgency}
+              posted={req.data.posted}
+              location={req.data.location}
+              // onClick={() => makeTask(req)}
+              // cancelRequest={cancelRequest}
+              // acceptRequest={acceptRequest}
+              // completeRequest={completeRequest}
+            />
+          ))}
+        </div>
+      </Stack>
+    </Box>
   );
 };
 
