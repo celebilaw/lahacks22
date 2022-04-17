@@ -87,6 +87,7 @@ const MyRequests = (props) => {
     })
     props.fetchData();
     setShow(false);
+    setPendingRequests(pendingRequests.filter((r) => r.id!=id));
   };
 
   const cancelRequest = async (id) => {
