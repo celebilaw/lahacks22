@@ -2,6 +2,7 @@ import { useReducer, useState, createContext } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { getDocs, collection, where, query } from "firebase/firestore";
 import './App.css';
+
 import HomePage from './components/HomePage'
 import UserProfile from './components/UserProfile.js';
 import Login from './components/Login.js';
@@ -41,9 +42,8 @@ function App() {
       <div>
         <Navbar fetchData={fetchData}/>
         <Routes>
-          {/* <Route path='/' element={1 ? <HomePage fetchData={fetchData} borrowReqs={borrowReqs} /> : <Login /> } /> */}
-          <Route path='/' element={<HomePage fetchData={fetchData} borrowReqs={borrowReqs} /> } />
-          <Route path='/about' element={<AboutUs />} />
+          <Route path='/' element={loggedin ? <HomePage fetchData={fetchData} borrowReqs={borrowReqs} /> : <Login /> } />
+          <Route path='/about' element={<Login />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/user-profile' element={<UserProfile />} />
