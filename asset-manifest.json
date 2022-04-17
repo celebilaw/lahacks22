@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/lahacks22/static/css/main.f57b867d.css",
-    "main.js": "/lahacks22/static/js/main.de3c164d.js",
+    "main.css": "/lahacks22/static/css/main.d239f789.css",
+    "main.js": "/lahacks22/static/js/main.b0b0c168.js",
     "static/media/createdBy.svg": "/lahacks22/static/media/createdBy.f0cf5cb34ff649288731db7227f9fc36.svg",
     "static/media/welcome.svg": "/lahacks22/static/media/welcome.16aac6c8a09f82a4971023cdc4bb6844.svg",
     "static/media/logo.svg": "/lahacks22/static/media/logo.e364f80ff8745280942ed9608c4ae75f.svg",
@@ -14,11 +14,11 @@
     "static/media/lato-latin-ext-400-normal.woff2": "/lahacks22/static/media/lato-latin-ext-400-normal.361f3dbb9db6a5980326.woff2",
     "static/media/google.svg": "/lahacks22/static/media/google.73c339c6a98907f37f3c0acad4362067.svg",
     "index.html": "/lahacks22/index.html",
-    "main.f57b867d.css.map": "/lahacks22/static/css/main.f57b867d.css.map",
-    "main.de3c164d.js.map": "/lahacks22/static/js/main.de3c164d.js.map"
+    "main.d239f789.css.map": "/lahacks22/static/css/main.d239f789.css.map",
+    "main.b0b0c168.js.map": "/lahacks22/static/js/main.b0b0c168.js.map"
   },
   "entrypoints": [
-    "static/css/main.f57b867d.css",
-    "static/js/main.de3c164d.js"
+    "static/css/main.d239f789.css",
+    "static/js/main.b0b0c168.js"
   ]
 }
