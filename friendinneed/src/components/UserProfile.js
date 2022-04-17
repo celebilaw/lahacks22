@@ -11,7 +11,6 @@ onAuthStateChanged(auth, (user) => {
     // const uid = user.uid;
     // ...
   } else {
-    alert('User not logged in!');
     let navigate = useNavigate();
     navigate('/', { replace: true });
     // User is signed out
