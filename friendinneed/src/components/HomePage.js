@@ -131,9 +131,11 @@ function HomePage(props) {
   return (
     <div className="HomeContainer">
       <div className="LeftSide">
+        <br/>
         <h1 style={{"line-height": "80%"}}>
           Current Requests
         </h1>
+        <br/><br/>
         <img src={ULegend} alt="Urgency Legend" width="100%" />
         <br />
         <br />
