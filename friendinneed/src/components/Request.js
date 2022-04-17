@@ -18,7 +18,7 @@ function Request(props) {
                         component="img"
                         alt="Urgency Color"
                         image={require(`../imgs/${props.urgency}.png`)}
-                        sx={{ "height": "0.5vw" }}
+                        sx={{ "height": "0.5vw  " }}
                     />
                     <CardContent>
                         <Typography variant="h5" component="div"><b>{props.item}</b></Typography>
