@@ -11,7 +11,8 @@ function YellowButton({text, className, ...props}) {
     //     console.log({text} + " " + {isClicked});
     // }
     const styles = classNames({
-        "rounded-full h-7 w-60 m-2 bg-light-gold text-black  \
+        "rounded-full h-12 w-60 m-2 bg-light-gold text-black  \
+         text-base \
          hover:border-2 hover:border-gold \
          active:bg-gold border-gold \
          focus:shadow-md focus:shadow-light-gray": true,
