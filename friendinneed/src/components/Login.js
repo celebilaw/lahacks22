@@ -3,6 +3,9 @@ import WelcomeLogo from './icons/welcome.svg';
 import "../css/Login.css";
 import {db} from '../config';
 import Container from '@mui/material/Container';
+import '@fontsource/lato';
+import GoogleButton1 from './GoogleButton1';
+
 // signInWithPopup(auth, provider)
 //   .then((result) => {
 //     // This gives you a Google Access Token. You can use it to access the Google API.
@@ -68,7 +71,8 @@ const Login = () => {
                     Friend in Need is a community-based app to foster communal wellness
                     and make students’ daily lives easier.
                 </p>
-                <img className="googleButton" src={GoogleButton} alt="google" />
+                {/* <img className="googleButton" src={GoogleButton} alt="google" /> */}
+                <GoogleButton1 className="googleButton"/>
             </div>
         </Container>
     )

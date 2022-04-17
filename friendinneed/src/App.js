@@ -11,6 +11,7 @@ import NotFoundPage from './components/NotFoundPage';
 import { auth } from'./config';
 import {onAuthStateChanged} from 'firebase/auth';
 import { db } from "./config";
+import AboutUs from './components/AboutUs';
 
 function App() {
   let [loggedin, setLoggedin] = useState(0);
@@ -43,7 +44,7 @@ function App() {
         <Routes>
           {/* <Route path='/' element={1 ? <HomePage fetchData={fetchData} borrowReqs={borrowReqs} /> : <Login /> } /> */}
           <Route path='/' element={<HomePage fetchData={fetchData} borrowReqs={borrowReqs} /> } />
-          <Route path='/about' element={<Login />} />
+          <Route path='/about' element={<AboutUs />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='*' element={<NotFoundPage />} />
