@@ -10,9 +10,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-function HomePage() {
-  
-  const [borrowReqs, setBorrowReqs] = useState([]);
+function HomePage(props) {
   const [show, setShow] = React.useState(false);
 
   const handleClickShow = () => {
@@ -34,13 +32,18 @@ function HomePage() {
   const cancelRequest = async (id) => {
     const docRef = doc(db, "borrowrequests", id);
     await deleteDoc(docRef);
+    props.fetchData();
   }
 
   const acceptRequest = async (id) => {
+    console.log("accept");
     const docRef = doc(db, "borrowrequests", id);
     await updateDoc(docRef, {
       status: 1
     });
+
+    // document.getElementById("request-info-popup").classList.toggle("show");
+    props.fetchData();
   }
 
   const completeRequest = async (id) => {
@@ -48,6 +51,7 @@ function HomePage() {
     await updateDoc(docRef, {
       status: 2
     });
+    props.fetchData();
   }
 
   const makeTask = (res) => {
@@ -61,24 +65,13 @@ function HomePage() {
   }
 
   useEffect(() => {
-    async function fetchData() {
-      const querySnapshot = await getDocs(collection(db, "borrowrequests"));
-      // querySnapshot.forEach((doc) => {
-      //   // doc.data() is never undefined for query doc snapshots
-      //   console.log(doc.id, " => ", doc.data());
-      // });
-      setBorrowReqs(querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        data: doc.data()
-      })));
-    }
-    fetchData();
+    props.fetchData();
   }, []);
 
   return (
     <div>
       <div className="RequestCards">
-        {borrowReqs.map((req) => (
+        {props.borrowReqs.map((req) => (
         <Request
           id={req.id}
           key={req.id}
@@ -97,7 +90,7 @@ function HomePage() {
         />
       ))}
       {show && 
-        <Dialog open={show} onClose={handleClickClose} fullWidth maxWidth="sm">
+        <Dialog id="request-info-popup" open={show} onClose={handleClickClose} fullWidth maxWidth="sm">
           <DialogTitle sx={{ fontWeight: "bold", fontSize: 35 }}>
             <span className="dialogTitle">
               {taskInfo[0]}
@@ -121,7 +114,15 @@ function HomePage() {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button className="dialogName" sx={{ fontWeight: "bold", fontSize: 20 }} style={{backgroundColor: "#FFDE7C"}} onClick={acceptRequest(taskInfo[5])}>Accept</Button>
+            <Button 
+              className="dialogName" 
+              sx={{ fontWeight: "bold", fontSize: 20 }} 
+              style={{backgroundColor: "#FFDE7C"}} 
+              onClick={() => {
+                acceptRequest(taskInfo[5]);
+              }}>
+                Accept
+            </Button>
           </DialogActions>
         </Dialog>
       }

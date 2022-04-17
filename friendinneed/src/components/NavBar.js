@@ -11,7 +11,9 @@ import PostRequest from './PostRequest';
 import '@fontsource/patua-one';
 import "../css/Navbar.css";
 
-const Navbar = () => {
+import { borrowReqContext } from "../App";
+
+const Navbar = (props) => {
 
     const handleNewRequest = (e) => {
         document.getElementById("request-form").classList.toggle("show");
@@ -19,7 +21,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <PostRequest />
+            <PostRequest fetchData={props.fetchData} />
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar position="static" style={{ background: 'white' }}>
                     <Toolbar>

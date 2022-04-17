@@ -1,5 +1,6 @@
-import { useReducer, useState } from 'react'
+import { useReducer, useState, createContext } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { getDocs, collection } from "firebase/firestore";
 import './App.css';
 import HomePage from './components/HomePage'
 import UserProfile from './components/UserProfile.js';
@@ -9,6 +10,7 @@ import Navbar from './components/NavBar.js';
 import NotFoundPage from './components/NotFoundPage';
 import { auth } from'./config';
 import {onAuthStateChanged} from 'firebase/auth';
+import { db } from "./config";
 
 function App() {
   let [loggedin, setLoggedin] = useState(0);
@@ -22,12 +24,24 @@ function App() {
     } else {
     }
   });
+
+  const [borrowReqs, setBorrowReqs] = useState([]);
+
+  async function fetchData() {
+    const querySnapshot = await getDocs(collection(db, "borrowrequests"));
+    setBorrowReqs(querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      data: doc.data()
+    })));
+  }
+
   return (
     <BrowserRouter>
       <div>
-        <Navbar />
+        <Navbar fetchData={fetchData}/>
         <Routes>
-          <Route path='/' element={1 ? <HomePage /> : <Login /> } />
+          {/* <Route path='/' element={1 ? <HomePage fetchData={fetchData} borrowReqs={borrowReqs} /> : <Login /> } /> */}
+          <Route path='/' element={<HomePage fetchData={fetchData} borrowReqs={borrowReqs} /> } />
           <Route path='/about' element={<Login />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
