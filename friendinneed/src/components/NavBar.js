@@ -103,19 +103,19 @@ const Navbar = (props) => {
                             <Link className='navTitle' to='/'> need</Link>
                         </Typography>
                         <Stack direction="row" spacing={2}>
-                            {loggedin && 
-                            <Button variant="text">
-                                <Link className="navLink" color="inherit" to="/user-profile" >User Profile</Link>
-                            </Button>
-                            }
-                            
                             <Button variant="text">
                                 <Link className="navLink" color="inherit" to="/about" >About Us</Link>
                             </Button>
+                            
+                            {loggedin &&
+                                <Button variant="text">
+                                    <Link className="navLink" color="inherit" to="/user-profile" >User Profile</Link>
+                                </Button>
+                            }
                             {loggedin && 
-                            <Button variant="text">
-                                <Link className="navLink" color="inherit" to="/my-requests" >My Requests</Link>
-                            </Button>
+                                <Button variant="text">
+                                    <Link className="navLink" color="inherit" to="/my-requests" >My Requests</Link>
+                                </Button>
                             }
                             <YellowButton text={loggedin ? "Request an Item" : "Sign in"} variant="contained" onClick={loggedin ? handleNewRequest : handleNewRequest}/>
                         </Stack>
