@@ -49,7 +49,7 @@ function App() {
           <Route path='/about' element={<AboutUs />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/my-requests' element={<MyRequests />} />
+          <Route path='/my-requests' element={<MyRequests fetchData={fetchData} borrowReqs={borrowReqs} />} />
           <Route path='/user-profile' element={<UserProfile />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
