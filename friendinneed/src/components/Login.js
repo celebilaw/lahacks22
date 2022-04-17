@@ -6,24 +6,7 @@ import Container from '@mui/material/Container';
 import '@fontsource/lato';
 import GoogleButton1 from './GoogleButton1';
 
-// signInWithPopup(auth, provider)
-//   .then((result) => {
-//     // This gives you a Google Access Token. You can use it to access the Google API.
-//     const credential = GoogleAuthProvider.credentialFromResult(result);
-//     const token = credential.accessToken;
-//     // The signed-in user info.
-//     const user = result.user;
-//     // ...
-//   }).catch((error) => {
-//     // Handle Errors here.
-//     const errorCode = error.code;
-//     const errorMessage = error.message;
-//     // The email of the user's account used.
-//     const email = error.email;
-//     // The AuthCredential type that was used.
-//     const credential = GoogleAuthProvider.credentialFromError(error);
-//     // ...
-//   });
+
 import { auth, provider } from '../config.js';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import IconButton from '@mui/material/IconButton';
@@ -72,7 +55,7 @@ const Login = () => {
                     and make students’ daily lives easier.
                 </p>
                 {/* <img className="googleButton" src={GoogleButton} alt="google" /> */}
-                <GoogleButton1 className="googleButton"/>
+                <GoogleButton1 onClick={signInWithGoogle} className="googleButton"/>
             </div>
         </Container>
     )

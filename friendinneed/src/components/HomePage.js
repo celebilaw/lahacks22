@@ -11,6 +11,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ULegend from "./icons/urgency_legend.svg";
 import '@fontsource/lato';
+import YellowButton from './YellowButton.js';
 
 function HomePage(props) {
   const [show, setShow] = React.useState(false);
@@ -124,7 +125,8 @@ function HomePage(props) {
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button className="dialogName" sx={{ fontWeight: "bold", fontSize: 20 }} style={{ backgroundColor: "#FFDE7C" }} onClick={() => {acceptRequest(taskInfo[5])}}>Accept</Button>
+                {/* <Button className="dialogName" sx={{ fontWeight: "bold", fontSize: 20 }} style={{ backgroundColor: "#FFDE7C" }} onClick={() => {acceptRequest(taskInfo[5])}}>Accept</Button> */}
+                <YellowButton text={"Accept"} onClick={() => {acceptRequest(taskInfo[5])}} className="dialogName"/>
               </DialogActions>
             </Dialog>
           }

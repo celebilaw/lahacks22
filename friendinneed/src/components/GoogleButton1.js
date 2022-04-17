@@ -36,7 +36,7 @@ function GoogleButton1({className, ...props}) {
 
     return (
         <div className="">
-        <button onSubmit={doSubmit} className={styles}>
+        <button onClick={props.onClick} className={styles}>
         <img src={google} style={{height: 15, display: 'unset'}}></img>
             <span>                   Continue with Google</span>
             </button>
