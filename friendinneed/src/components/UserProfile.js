@@ -85,8 +85,9 @@ const UserProfile = () => {
           items borrowed
         </h2>
       </div>
-      <div style={{width: '40%', marginLeft: '500px', marginBottom: '300px'}}>
+      {/* <div style={{width: '40%', marginLeft: '500px', marginBottom: '300px'}}> */}
         <Circle 
+            style={{width: '40%', marginLeft: '500px', marginBottom: '500px'}}
             percent={progress}
             strokeWidth="4" 
             strokeColor="#477BE8" 
@@ -95,7 +96,7 @@ const UserProfile = () => {
             gapDegree="150"
             gapPosition="bottom"
         /> 
-      </div>
+      {/* </div> */}
     </div>
   )
 }
