@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
-import { db } from '../config.js';
+import { db, auth } from '../config.js';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 import "./HomePage.css";
 import Request from "./Request";
 import Button from '@mui/material/Button';
@@ -10,6 +12,24 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ULegend from "./icons/urgency_legend.svg";
+
+let name, uid;
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        // const uid = user.uid;
+        name = user.displayName;
+        uid = user.uid;
+        // ...
+    } else {
+        alert('User not logged in!');
+        let navigate = useNavigate();
+        navigate('/', { replace: true });
+        // User is signed out
+        // ...
+    }
+});
 
 function HomePage(props) {
   const [show, setShow] = React.useState(false);
@@ -47,7 +67,9 @@ function HomePage(props) {
     console.log("accept");
     const docRef = doc(db, "borrowrequests", id);
     await updateDoc(docRef, {
-      status: 1
+      status: 1,
+      fulfiller: uid,
+      fulfillername: name
     });
 
     // document.getElementById("request-info-popup").classList.toggle("show");

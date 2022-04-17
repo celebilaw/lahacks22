@@ -63,6 +63,7 @@ const PostRequest = (props) => {
       owner: uid,
       requester: name,//replace with auth user
       fulfiller: '',
+      fulfillername: '',
       posted: Timestamp.now(),
       urgency: urgency,
       status: 0
