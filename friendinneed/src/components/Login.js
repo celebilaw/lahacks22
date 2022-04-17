@@ -3,6 +3,8 @@ import WelcomeLogo from './icons/welcome.svg';
 import "../css/Login.css";
 import {db} from '../config';
 import Container from '@mui/material/Container';
+import '@fontsource/lato';
+import GoogleButton1 from './GoogleButton1';
 import { auth, provider } from '../config.js';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -59,7 +61,8 @@ const Login = () => {
                     Friend in Need is a community-based app to foster communal wellness
                     and make students’ daily lives easier.
                 </p>
-                <img className="googleButton" src={GoogleButton} alt="google" />
+                {/* <img className="googleButton" src={GoogleButton} alt="google" /> */}
+                <GoogleButton1 onClick={signInWithGoogle} className="googleButton"/>
             </div>
         </Container>
     )

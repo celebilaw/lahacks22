@@ -1,9 +1,9 @@
 .navLink {
-    text-decoration: none;
-    text-transform: none;
-    font-size: 16px;
-    color: black;
-    font-family: 'Patua One';
+  text-decoration: none;
+  text-transform: none;
+  font-size: 16px;
+  color: black;
+  font-family: "Lato";
 }
 
 /* .navButton {
@@ -15,9 +15,17 @@
 } */
 
 .navTitle {
-    text-decoration: none;
-    text-transform: none;
-    font-size: 24px;
-    color: #337DEF;
-    font-family: 'Patua One';
+  text-decoration: none;
+  text-transform: none;
+  font-size: 24px;
+  color: #337def;
+  font-family: "Patua One";
+}
+
+.navTitle2 {
+  text-decoration: none;
+  text-transform: none;
+  font-size: 24px;
+  color: #f3c950;
+  font-family: "Patua One";
 }

@@ -16,13 +16,14 @@ import { auth, db } from '../config.js';
 import { collection, Timestamp, doc, setDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import landmarks from "./places"
 
 // const user = auth.currentUser;
 // let name = ''
 // if(user){
 //     name = user.displayName;
 // }
-let name, uid;
+let name, uid, email;
 onAuthStateChanged(auth, (user) => {
     if (user) {
         // User is signed in, see docs for a list of available properties
@@ -30,6 +31,7 @@ onAuthStateChanged(auth, (user) => {
         // const uid = user.uid;
         name = user.displayName;
         uid = user.uid;
+        email = user.email;
         // ...
     } else {
         alert('User not logged in!');
@@ -60,10 +62,12 @@ const PostRequest = (props) => {
       item: item,
       description: description,
       location: location,
-      owner: uid,
-      requester: name,//replace with auth user
-      fulfiller: '',
+      requester: uid,//replace with auth user
+      requestername: name,
+      requesteremail: email,
+      fulfiller: '', //this is an id
       fulfillername: '',
+      fulfilleremail: '',
       posted: Timestamp.now(),
       urgency: urgency,
       status: 0
@@ -91,7 +95,6 @@ const PostRequest = (props) => {
   }
 
   const urgencies = ["SOS", "Immediate", "Couple Hours", "Days", "Weeks"]
-  const landmarks = ["Powell", "YRL", "Sproul", "Delta Terrace", "Sunset Village", "Rieber", "De Neve", "Olympic", "Centennial", "Ackerman", "Court of Sciences", "Inverted Fountain"].sort() // Sort by alphabetical order
 
   return (
     <div>

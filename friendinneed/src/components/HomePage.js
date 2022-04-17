@@ -12,6 +12,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ULegend from "./icons/urgency_legend.svg";
+import TextField from '@mui/material/TextField';
+import { MenuItem } from '@mui/material';
+import landmarks from "./places.js"
+import '@fontsource/lato';
 
 let name, uid;
 onAuthStateChanged(auth, (user) => {
@@ -32,7 +36,12 @@ onAuthStateChanged(auth, (user) => {
 });
 
 function HomePage(props) {
-  const [show, setShow] = React.useState(false);
+  if (!landmarks.includes("")) {
+    landmarks.push("");
+  }
+
+  const [show, setShow] = useState(false);
+  const [locFilter, setLocFilter] = useState("");
 
   const handleClickShow = () => {
     setShow(true);
@@ -47,7 +56,7 @@ function HomePage(props) {
 
   const taskAssembly = (res) => {
     setTaskInfo([res.data.item, res.data.description,
-    res.data.requester, res.data.location, date, res.id]);
+    res.data.requestername, res.data.location, date, res.id]);
   }
 
   const makeTask = (res) => {
@@ -74,7 +83,7 @@ function HomePage(props) {
 
     // document.getElementById("request-info-popup").classList.toggle("show");
     props.fetchData();
-    window.location.reload(true);
+    setShow(false);
   }
 
   const completeRequest = async (id) => {
@@ -108,29 +117,43 @@ function HomePage(props) {
     <div className="HomeContainer">
       <div className="LeftSide">
         <h1>Current<br />Requests</h1>
-        <img src={ULegend} alt="Urgency Legend" />
+        <img src={ULegend} alt="Urgency Legend" width="100%" />
+        <br /><br />
+        <TextField
+          id="LocationFilter"
+          value={locFilter}
+          onChange={(e) => { setLocFilter(e.target.value) }}
+          select
+          label="Location Filter"
+          sx={{ "width": "100%" }}>
+          {landmarks.map(place => <MenuItem value={place} key={place}>{place === "" ? "Clear Filter" : place}</MenuItem>)}
+        </TextField>
       </div>
 
       <div className="RightSide">
         <div className="RequestCards">
-          {props.borrowReqs.map((req) => (
-            <Request
-              id={req.id}
-              key={req.id}
-              item={req.data.item}
-              description={req.data.description}
-              requester={req.data.requester}
-              fulfiller={req.data.fulfiller}
-              status={req.data.status}
-              urgency={req.data.urgency}
-              posted={req.data.posted}
-              location={req.data.location}
-              onClick={() => makeTask(req)}
-              cancelRequest={cancelRequest}
-              acceptRequest={acceptRequest}
-              completeRequest={completeRequest}
-            />
-          ))}
+          {props.borrowReqs.map((req) => {
+            if (locFilter === "" || locFilter === req.data.location) {
+              return <Request
+                id={req.id}
+                key={req.id}
+                item={req.data.item}
+                description={req.data.description}
+                requestername={req.data.requestername}
+                requesteremail={req.data.requesteremail}
+                fulfillername={req.data.fulfillername}
+                fulfilleremail={req.data.fulfilleremail}
+                status={req.data.status}
+                urgency={req.data.urgency}
+                posted={req.data.posted}
+                location={req.data.location}
+                onClick={() => makeTask(req)}
+                cancelRequest={cancelRequest}
+                acceptRequest={acceptRequest}
+                completeRequest={completeRequest}
+              />
+            }
+          })}
           {show &&
             <Dialog open={show} onClose={handleClickClose} fullWidth maxWidth="sm">
               <DialogTitle sx={{ fontWeight: "bold", fontSize: 35 }}>
@@ -156,7 +179,7 @@ function HomePage(props) {
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button className="dialogName" sx={{ fontWeight: "bold", fontSize: 20 }} style={{ backgroundColor: "#FFDE7C" }} onClick={() => {acceptRequest(taskInfo[5])}}>Accept</Button>
+                <Button className="dialogName" sx={{ fontWeight: "bold", fontSize: 20 }} style={{ backgroundColor: "#FFDE7C" }} onClick={() => { acceptRequest(taskInfo[5]) }}>Accept</Button>
               </DialogActions>
             </Dialog>
           }

@@ -6,10 +6,9 @@
 
 .LeftSide {
     width: 20%;
-    height: 100%;
     float: left;
     padding-left: 20px;
-    text-align: center;
+    padding-right: 10px;
 }
 
 .RightSide {

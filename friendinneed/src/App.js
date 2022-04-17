@@ -1,7 +1,8 @@
 import { useReducer, useState, createContext } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { getDocs, collection, where, query } from "firebase/firestore";
 import './App.css';
+
 import HomePage from './components/HomePage'
 import UserProfile from './components/UserProfile.js';
 import Login from './components/Login.js';
@@ -12,6 +13,7 @@ import MyRequests from './components/MyRequests';
 import { auth } from'./config';
 import {onAuthStateChanged} from 'firebase/auth';
 import { db } from "./config";
+import AboutUs from './components/AboutUs';
 
 function App() {
   let uid;
@@ -39,13 +41,12 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div>
         <Navbar fetchData={fetchData}/>
         <Routes>
-          {/* <Route path='/' element={1 ? <HomePage fetchData={fetchData} borrowReqs={borrowReqs} /> : <Login /> } /> */}
-          <Route path='/' element={<HomePage fetchData={fetchData} borrowReqs={borrowReqs} /> } />
-          {/* <Route path='/about' element={<AboutUs />} /> */}
+          <Route path='/' element={loggedin ? <HomePage fetchData={fetchData} borrowReqs={borrowReqs} /> : <Login /> } />
+          <Route path='/about' element={<AboutUs />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/my-requests' element={<MyRequests />} />
@@ -53,7 +54,7 @@ function App() {
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 export default App;
