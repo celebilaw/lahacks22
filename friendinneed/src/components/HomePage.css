@@ -1,3 +1,23 @@
+.HomeContainer {
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+}
+
+.LeftSide {
+    width: 20%;
+    height: 100%;
+    float: left;
+    padding-left: 20px;
+    text-align: center;
+}
+
+.RightSide {
+    width: 80%;
+    float: right;
+    padding-right: 20px;
+}
+
 .RequestForm {
     visibility: hidden;
     position: absolute;
@@ -6,8 +26,11 @@
     padding: 8px;
 }
 
-.RequestCards{
+.RequestCards {
     text-align: center;
+    margin: auto;
+    position: relative;
+    top: 20px;
 }
 
 /* Toggle this class when clicking on the popup container (hide and show the popup) */
@@ -19,11 +42,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow:  0 0 0  9999px rgba(0, 0, 0, .6);
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, .6);
     border-radius: 5%;
 }
 
-.show + .RequestCards{
+.show+.RequestCards {
     opacity: 0.2;
     transition: opacity 1s linear;
 }
