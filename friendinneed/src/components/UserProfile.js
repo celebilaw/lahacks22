@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useAuthState } from "react-firebase-hooks/auth";
-import { getDoc, doc, exists } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { db, auth } from '../config.js';
@@ -23,7 +23,6 @@ onAuthStateChanged(auth, (user) => {
 //const load = await getDoc
 const UserProfile = () => {
   const user = auth.currentUser;
-
   const [profile, setProfile] = useState({});
 
   // function fetchUserData() {
@@ -49,16 +48,6 @@ const UserProfile = () => {
             console.log("No such document!");
           }
         })}
-      //   const q = doc(db, "user-profiles", user.uid);
-      //   const docSnap = getDoc(q);
-      //   if (docSnap.exists()) {
-      //     console.log("user data:", docSnap.data());
-          
-      //   } else {
-      //     console.log("bad!");
-      //   }
-      //   setProfile(user);
-      // }
     }, [user]);
 
 
