@@ -51,15 +51,9 @@ const Navbar = (props) => {
                             <Button variant="text">
                                 <Link className="navLink" color="inherit" to="/about" >About Us</Link>
                             </Button>
-                            {/* <Button variant="contained" onClick={handleNewRequest} 
-                                style={{ 
-                                    textTransform: 'none', 
-                                    backgroundColor: '#fcc200', 
-                                    fontFamily: 'Patua One',
-                                    fontSize: 20,
-                                }}>
-                                <txt color="inherit">Request an Item</txt>
-                            </Button> */}
+                            <Button variant="text">
+                                <Link className="navLink" color="inherit" to="/my-requests" >My Requests</Link>
+                            </Button>
                              <YellowButton text={"Request an Item"} variant="contained" onClick={handleNewRequest}/>
                         </Stack>
                     </Toolbar>
