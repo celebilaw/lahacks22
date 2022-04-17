@@ -16,6 +16,7 @@ import { auth, db } from '../config.js';
 import { collection, Timestamp, doc, setDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import landmarks from "./places"
 
 // const user = auth.currentUser;
 // let name = ''
@@ -90,7 +91,6 @@ const PostRequest = (props) => {
   }
 
   const urgencies = ["SOS", "Immediate", "Couple Hours", "Days", "Weeks"]
-  const landmarks = ["Powell", "YRL", "Sproul", "Delta Terrace", "Sunset Village", "Rieber", "De Neve", "Olympic", "Centennial", "Ackerman", "Court of Sciences", "Inverted Fountain"].sort() // Sort by alphabetical order
 
   return (
     <div>
