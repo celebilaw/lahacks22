@@ -1,4 +1,10 @@
+<<<<<<< Updated upstream
 import React, { useState } from 'react'
+=======
+import React, { useState, useEffect } from 'react'
+import { collection, getDocs, doc, deleteDoc, updateDoc, query, where } from "firebase/firestore";
+import {db} from '../config.js';
+>>>>>>> Stashed changes
 import "./HomePage.css"
 import Request from "./Request"
 import AddIcon from '@mui/icons-material/Add';
@@ -9,6 +15,7 @@ import { MenuItem } from '@mui/material';
 
 function HomePage() {
 
+<<<<<<< Updated upstream
   let [item, setItem] = useState("");
   let [description, setDescription] = useState("");
   let [urgency, setUrgency] = useState("");
@@ -57,6 +64,44 @@ function HomePage() {
 
   const urgencies = ["SOS", "Immediate", "Couple Hours", "Days", "Weeks"]
   const landmarks = ["Powell", "YRL", "Sproul", "Delta Terrace", "Sunset Village", "Rieber", "De Neve", "Olympic", "Centennial"].sort() // Sort by alphabetical order
+=======
+  const [borrowReqs, setBorrowReqs] = useState([]);
+
+  async function fetchData() {
+    const q = query(collection(db, "borrowrequests"), where("status", "!=", 2));
+    const querySnapshot = await getDocs(q);
+    setBorrowReqs(querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      data: doc.data()
+    })));
+  }
+  
+  const cancelRequest = async (id) => {
+    const docRef = doc(db, "borrowrequests", id);
+    await deleteDoc(docRef);
+    fetchData();
+  }
+
+  const acceptRequest = async (id) => {
+    const docRef = doc(db, "borrowrequests", id);
+    await updateDoc(docRef, {
+      status: 1
+    });
+    fetchData();
+  }
+
+  const completeRequest = async (id) => {
+    const docRef = doc(db, "borrowrequests", id);
+    await updateDoc(docRef, {
+      status: 2
+    });
+    fetchData();
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+>>>>>>> Stashed changes
 
   return (
     <div>
@@ -97,11 +142,31 @@ function HomePage() {
       </Stack>
 
       <div className="RequestCards">
+<<<<<<< Updated upstream
         <Button className="AddRequest" id="AddIcon" onClick={handleNewRequest}><AddIcon /></Button>
 
         <Request title="Tweezers" desc="I need tweezers to pull out an ASUCLA food ticket I got stuck in my phone wallet. Thank you so much!" requester="Celebi Law" status="Fulfilled by Kyle Pu" />
         <Request title="Tweezers" desc="I need tweezers to pull out an ASUCLA food ticket I got stuck in my phone wallet. Thank you so much!" requester="Celebi Law" status="Fulfilled by Kyle Pu" />
         <Request title="Tweezers" desc="I need tweezers to pull out an ASUCLA food ticket I got stuck in my phone wallet. Thank you so much!" requester="Celebi Law" status="Fulfilled by Kyle Pu" />
+=======
+        {borrowReqs.map((req) => (
+        <Request
+          id={req.id}
+          key={req.id}
+          item={req.data.item} 
+          description={req.data.description}
+          requester={req.data.requester}
+          fulfiller={req.data.fulfiller}
+          status={req.data.status}
+          urgency={req.data.urgency}
+          posted={req.data.posted}
+          location={req.data.location}
+          cancelRequest={cancelRequest}
+          acceptRequest={acceptRequest}
+          completeRequest={completeRequest}
+        />
+      ))}
+>>>>>>> Stashed changes
       </div>
     </div>
   );
