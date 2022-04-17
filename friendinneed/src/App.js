@@ -25,7 +25,7 @@ function App() {
       <div>
         <Navbar />
         <Routes>
-          <Route path='/' element={loggedin ? <HomePage /> : <Login /> } />
+          <Route path='/' element={1 ? <HomePage /> : <Login /> } />
           <Route path='/about' element={<Login />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />

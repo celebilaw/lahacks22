@@ -23,14 +23,13 @@ function HomePage() {
     setShow(false);
   }
 
-  let taskInfo = []
+  const [taskInfo, setTaskInfo] = useState([]);
+  const [date, convertDate] = useState("");
 
   const taskAssembly = (res) => {
-    taskInfo.push(res.data.title);
-    taskInfo.push(res.data.desc);
-    taskInfo.push(res.data.requester);
-    taskInfo.push(res.data.priority);
-    taskInfo.push(res.data.location);
+    setTaskInfo([res.data.item, res.data.description, 
+      res.data.requester, res.data.location, date, res.id])
+  }
 
   const cancelRequest = async (id) => {
     const docRef = doc(db, "borrowrequests", id);
@@ -52,8 +51,13 @@ function HomePage() {
   }
   
   const makeTask = (res) => {
-    handleClickShow();
     taskAssembly(res);
+    handleClickShow();
+    convertDate(formatDate(res.data.posted)); // need to fix
+  }
+
+  const formatDate = (date) => {
+    return date.toISOString().split('T')[0]
   }
 
   useEffect(() => {
@@ -90,18 +94,31 @@ function HomePage() {
         />
       ))}
       {show && 
-        <Dialog>
-          <DialogTitle>
-            {taskInfo[0]}
+        <Dialog open={show} onClose={handleClickClose} fullWidth maxWidth="sm">
+          <DialogTitle sx={{ fontWeight: "bold", fontSize: 35 }}>
+            <span className="dialogTitle">
+              {taskInfo[0]}
+            </span>
+            &nbsp;-&nbsp;
+            <span className="dialogName">
+              {taskInfo[2]}
+            </span> 
           </DialogTitle>
           <DialogContent>
-            <DialogContentText>
+            <DialogContentText sx={{ fontSize: 25 }}>
               {taskInfo[1]}
+            </DialogContentText>
+            <br />
+            <br/>
+            <DialogContentText textAlign="right" sx={{ fontSize: 18 }}>
+              Location : {taskInfo[3]}
+            </DialogContentText>
+            <DialogContentText textAlign="right" sx={{ fontSize: 18 }}>
+              Posted : {taskInfo[4]}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClickClose}>Nah</Button>
-            <Button onClick={handleClickClose}>Yap</Button>
+            <Button className="dialogName" sx={{ fontWeight: "bold", fontSize: 20 }} style={{backgroundColor: "#FFDE7C"}} onClick={acceptRequest(taskInfo[5])}>Accept</Button>
           </DialogActions>
         </Dialog>
       }
