@@ -55,7 +55,7 @@ const Navbar = () => {
                                 }}>
                                 <txt color="inherit">Request an Item</txt>
                             </Button> */}
-                            <YellowButton text={"Request an Item"}/>
+                            <YellowButton text={"Request an Item"} variant="contained" onClick={handleNewRequest}/>
                         </Stack>
                     </Toolbar>
                 </AppBar>
