@@ -1,5 +1,7 @@
 # LA Hacks 2022
 
+Our [Figma](https://www.figma.com/file/ofPCc7tHNW43lKK56T5ANL/Friend-in-Me?node-id=56%3A938)!
+
 ## Inspiration
 Everyone could use an extra friend to lend them something in times of need.
 
