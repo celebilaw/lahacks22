@@ -51,7 +51,6 @@ const Navbar = () => {
                                 }}>
                                 <txt color="inherit">Request an Item</txt>
                             </Button>
-                            <p  style={{"font-size": "28px", color: "black"}}>{document.cookie.split('; ').find(row => row.startsWith('username=')).split('=')[1]}</p>
                         </Stack>
                     </Toolbar>
                 </AppBar>
