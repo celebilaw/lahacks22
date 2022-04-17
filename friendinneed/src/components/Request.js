@@ -22,7 +22,7 @@ function Request(props) {
                     />
                     <CardContent>
                         <Typography variant="h5" component="div"><b>{props.item}</b></Typography>
-                        <Typography variant="body2"><i>{props.location}</i></Typography>
+                        <Typography variant="body2" style={{"white-space": "nowrap"}}><i>{props.location}</i></Typography>
                         {/* x */}
                     </CardContent>
                 </CardActionArea>

@@ -23,6 +23,7 @@ import TextField from "@mui/material/TextField";
 import { MenuItem } from "@mui/material";
 import landmarks from "./places.js";
 import "@fontsource/lato";
+import urgencies from "./urgencies"
 
 let name, uid, email;
 onAuthStateChanged(auth, (user) => {
@@ -49,6 +50,7 @@ function HomePage(props) {
 
   const [show, setShow] = useState(false);
   const [locFilter, setLocFilter] = useState("");
+  const [urgencyFilter, setUrgencyFilter] = useState("");
 
   const handleClickShow = () => {
     setShow(true);
@@ -132,11 +134,11 @@ function HomePage(props) {
   return (
     <div className="HomeContainer">
       <div className="LeftSide">
-        <br/>
-        <h1 style={{"line-height": "80%"}}>
+        <br />
+        <h1 style={{ "line-height": "80%" }}>
           Current Requests
         </h1>
-        <br/><br/>
+        <br /><br />
         <img src={ULegend} alt="Urgency Legend" width="100%" />
         <br />
         <br />
@@ -212,7 +214,7 @@ function HomePage(props) {
                   Requester Email : {taskInfo[8]}
                 </DialogContentText>
               </DialogContent>
-              {(taskInfo[9] != uid) && 
+              {(taskInfo[9] != uid) &&
                 <DialogActions>
                   <Button
                     className="dialogName"
