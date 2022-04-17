@@ -1,15 +1,18 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useState, useEffect } from 'react';
-import { db } from '../config';
+import { db, auth } from '../config';
 import Request from './Request';
 
 
 const MyRequests = () => {
   const [pendingRequests, setPendingRequests] = useState([]);
   const [acceptedRequests, setAcceptedRequests] = useState([]);
+  const user = auth.currentUser;
+  console.log(user);
 
   const fetchPendingRequestsForUser = async () => {
-    const q = query(collection(db, "borrowrequests"), where("status", "==", 0), where("owner", "==", "VHtkRpVLYCgOAWlbBb0nqBK1Txe2")); //TODO: remove hardcode
+
+    const q = query(collection(db, "borrowrequests"), where("status", "==", 0), where("owner", "==", auth.currentUser.uid)); //TODO: remove hardcode
     const querySnapshot = await getDocs(q);
     setPendingRequests(querySnapshot.docs.map(doc => ({
       id: doc.id,
@@ -18,7 +21,7 @@ const MyRequests = () => {
   };
 
   const fetchAcceptedRequestsForUser = async () => {
-    const q = query(collection(db, "borrowrequests"), where("status", "==", 1), where("owner", "==", "VHtkRpVLYCgOAWlbBb0nqBK1Txe2")); //TODO: remove hardcode
+    const q = query(collection(db, "borrowrequests"), where("status", "==", 1), where("owner", "==", auth.currentUser.uid)); //TODO: remove hardcode
     const querySnapshot = await getDocs(q);
     setAcceptedRequests(querySnapshot.docs.map(doc => ({
       id: doc.id,
@@ -27,8 +30,11 @@ const MyRequests = () => {
   };
 
   useEffect(() => {
-    fetchPendingRequestsForUser();
-    fetchAcceptedRequestsForUser();
+    if (!user) return;
+    if (user) { //doesn't work
+      fetchPendingRequestsForUser();
+      fetchAcceptedRequestsForUser();
+    }
   }, []);
 
 
