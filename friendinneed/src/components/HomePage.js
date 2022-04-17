@@ -36,7 +36,7 @@ function HomePage(props) {
 
   const taskAssembly = (res) => {
     setTaskInfo([res.data.item, res.data.description,
-    res.data.requester, res.data.location, date, res.id]);
+    res.data.requestername, res.data.location, date, res.id]);
   }
 
   const makeTask = (res) => {
@@ -83,7 +83,7 @@ function HomePage(props) {
   return (
     <div className="HomeContainer">
       <div className="LeftSide">
-        <h1 style={{"line-height": "80%"}}>Current Requests</h1>
+        <h1>Current<br />Requests</h1>
         <img src={ULegend} alt="Urgency Legend" width="100%" />
         <br /><br />
         <TextField
@@ -106,8 +106,10 @@ function HomePage(props) {
                 key={req.id}
                 item={req.data.item}
                 description={req.data.description}
-                requester={req.data.requester}
-                fulfiller={req.data.fulfiller}
+                requestername={req.data.requestername}
+                requesteremail={req.data.requesteremail}
+                fulfillername={req.data.fulfillername}
+                fulfilleremail={req.data.fulfilleremail}
                 status={req.data.status}
                 urgency={req.data.urgency}
                 posted={req.data.posted}

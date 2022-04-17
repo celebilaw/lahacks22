@@ -23,7 +23,7 @@ import landmarks from "./places"
 // if(user){
 //     name = user.displayName;
 // }
-let name, uid;
+let name, uid, email;
 onAuthStateChanged(auth, (user) => {
     if (user) {
         // User is signed in, see docs for a list of available properties
@@ -31,6 +31,7 @@ onAuthStateChanged(auth, (user) => {
         // const uid = user.uid;
         name = user.displayName;
         uid = user.uid;
+        email = user.email;
         // ...
     } else {
         alert('User not logged in!');
@@ -61,9 +62,12 @@ const PostRequest = (props) => {
       item: item,
       description: description,
       location: location,
-      owner: uid,
-      requester: name,//replace with auth user
-      fulfiller: '',
+      requester: uid,//replace with auth user
+      requestername: name,
+      requesteremail: email,
+      fulfiller: '', //this is an id
+      fulfillername: '',
+      fulfilleremail: '',
       posted: Timestamp.now(),
       urgency: urgency,
       status: 0
