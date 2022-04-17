@@ -1,0 +1,11 @@
+.horizontalWrapper {
+    display: flex;
+    flex-direction: row;
+    padding-left: 100px;
+    padding-top: 50px;
+}
+.bigText {
+    font-size: 500;
+    font-weight: 700;
+    /* font-family: 'Lato'; */
+}

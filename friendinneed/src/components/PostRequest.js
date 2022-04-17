@@ -75,6 +75,7 @@ const PostRequest = (props) => {
 
     // Clear form elements when user submits
     setItem("");
+    setDescription("");
     setUrgency("");
     setLocation("");
 
@@ -88,6 +89,7 @@ const PostRequest = (props) => {
   const handleCancel = (e) => {
     // Clear form elements when user cancels
     setItem("");
+    setDescription("");
     setUrgency("");
     setLocation("");
     document.getElementById("request-form").classList.toggle("show");
