@@ -17,9 +17,8 @@ function Request(props) {
                     <CardMedia
                         component="img"
                         alt="Urgency Color"
-                        height="5"
                         image={require(`../imgs/${props.urgency}.png`)}
-                        sx={{  }}
+                        sx={{ "height": "0.5vw" }}
                     />
                     <CardContent>
                         <Typography variant="h5" component="div"><b>{props.item}</b></Typography>

@@ -18,7 +18,7 @@ const AboutUs = () => {
         </div>
         <div class="column">
           <h2> Created by </h2>
-          <img src={createdBy}></img>
+          <img src={createdBy} width="80%"></img>
           {/* <GoogleButton/>
           <YellowButton/> */}
         </div>
