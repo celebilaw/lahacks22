@@ -71,6 +71,7 @@ function HomePage(props) {
       res.data.fulfillername,
       res.data.fulfilleremail,
       res.data.requesteremail,
+      res.data.requester
     ]);
   };
 
@@ -211,18 +212,20 @@ function HomePage(props) {
                   Requester Email : {taskInfo[8]}
                 </DialogContentText>
               </DialogContent>
-              <DialogActions>
-                <Button
-                  className="dialogName"
-                  sx={{ fontWeight: "bold", fontSize: 20 }}
-                  style={{ backgroundColor: "#FFDE7C" }}
-                  onClick={() => {
-                    acceptRequest(taskInfo[5]);
-                  }}
-                >
-                  Accept
-                </Button>
-              </DialogActions>
+              {(taskInfo[9] != uid) && 
+                <DialogActions>
+                  <Button
+                    className="dialogName"
+                    sx={{ fontWeight: "bold", fontSize: 20 }}
+                    style={{ backgroundColor: "#FFDE7C" }}
+                    onClick={() => {
+                      acceptRequest(taskInfo[5]);
+                    }}
+                  >
+                    Accept
+                  </Button>
+                </DialogActions>
+              }
             </Dialog>
           )}
         </div>
