@@ -71,21 +71,31 @@ const UserProfile = () => {
            {profile.name}
         </h1>
       </div>
-      <div style={{marginLeft: 100}}>
+      <div style={{marginLeft: 100, width: '20%'}}>
         {/* <h1>style={{fontWeight: 700, fontSize: 120, color: '#F3C950'}} {profile.items_lended}</h1> */}
         <CountUp style={{fontWeight: 700, fontSize: 120, color: '#F3C950'}} end={profile.items_lended} />
         <h2 style={{fontSize: 20, lineHeight: 0.5}}>
           items lended
         </h2>
       </div>
-      <div style={{marginLeft: 100}}>
+      <div style={{marginLeft: 100, width: '20%'}}>
         {/* <h1>style={{fontWeight: 700, fontSize: 120, color: '#F3C950'}} {profile.items_borrowed}</h1> */}
         <CountUp style={{fontWeight: 700, fontSize: 120, color: '#477BE8'}} end={profile.items_borrowed} />
         <h2 style={{fontSize: 20, lineHeight: 0.5}}>
           items borrowed
         </h2>
       </div>
-      
+      <div style={{width: '40%', marginLeft: '500px', marginBottom: '300px'}}>
+        <Circle 
+            percent={progress}
+            strokeWidth="4" 
+            strokeColor="#477BE8" 
+            trailColor="#F3C950"
+            trailWidth="4"
+            gapDegree="150"
+            gapPosition="bottom"
+        /> 
+      </div>
     </div>
   )
 }
