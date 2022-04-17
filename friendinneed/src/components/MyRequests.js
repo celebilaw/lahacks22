@@ -30,12 +30,11 @@ const MyRequests = () => {
   };
 
   useEffect(() => {
-    if (!user) return;
     if (user) { //doesn't work
       fetchPendingRequestsForUser();
       fetchAcceptedRequestsForUser();
     }
-  }, []);
+  }, [user]);
 
 
   return(
