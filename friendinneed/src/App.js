@@ -6,8 +6,10 @@ import UserProfile from './components/UserProfile.js';
 import Login from './components/Login.js';
 import Register from './components/Register.js';
 import Navbar from './components/NavBar.js';
+import NotFoundPage from './components/NotFoundPage';
 import { auth } from'./config';
 import {onAuthStateChanged} from 'firebase/auth';
+
 function App() {
   let [loggedin, setLoggedin] = useState(0);
   onAuthStateChanged(auth, (user) => {
@@ -25,10 +27,11 @@ function App() {
       <div>
         <Navbar />
         <Routes>
-          <Route path='/' element={loggedin ? <HomePage /> : <Login /> } />
+          <Route path='/' element={1 ? <HomePage /> : <Login /> } />
           <Route path='/about' element={<Login />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </div>
     </BrowserRouter>

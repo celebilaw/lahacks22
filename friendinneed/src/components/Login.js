@@ -1,5 +1,26 @@
 import GoogleButton from './icons/google-sign-in.svg';
-import { auth, provider, db } from '../config.js';
+import WelcomeLogo from './icons/welcome.svg';
+import "../css/Login.css";
+import Container from '@mui/material/Container';
+// signInWithPopup(auth, provider)
+//   .then((result) => {
+//     // This gives you a Google Access Token. You can use it to access the Google API.
+//     const credential = GoogleAuthProvider.credentialFromResult(result);
+//     const token = credential.accessToken;
+//     // The signed-in user info.
+//     const user = result.user;
+//     // ...
+//   }).catch((error) => {
+//     // Handle Errors here.
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     // The email of the user's account used.
+//     const email = error.email;
+//     // The AuthCredential type that was used.
+//     const credential = GoogleAuthProvider.credentialFromError(error);
+//     // ...
+//   });
+import {auth, provider} from'../config.js';
 import {signInWithPopup, GoogleAuthProvider} from 'firebase/auth';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
@@ -36,14 +57,19 @@ const Login = () => {
             });
         }
     return (
-        <div>
-            <IconButton onClick={signInWithGoogle}>
-                <img src={GoogleButton} alt='google login' style={{width:400}}></img>
-            </IconButton>
-            <p>
-                hello
-            </p>
-        </div>
+        <Container maxwidth="xl">
+            <img className="welcomeImage" src={WelcomeLogo} alt="Main Welcome Symbol"/>
+            <div className="rightContainer">
+                <h2 className="welcome">
+                    Welcome
+                </h2>
+                <p className="description">
+                    Friend in Need is a community-based app to foster communal wellness 
+                    and make students’ daily lives easier.
+                </p>
+                <img className="googleButton" src={GoogleButton} alt="google"/>
+            </div>
+        </Container>
     )
 }
 export default Login;

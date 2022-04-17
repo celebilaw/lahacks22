@@ -48,3 +48,12 @@
         opacity: 1;
     }
 }
+
+.dialogTitle {
+    color: #F3C950;
+    text-align: left;
+}
+
+.dialogName {
+    color: #337def;
+}
