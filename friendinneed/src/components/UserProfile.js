@@ -4,6 +4,9 @@ import { getDoc, doc } from "firebase/firestore";
 import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { db, auth } from '../config.js';
+import CountUp from 'react-countup';
+import ProgressProvider from './progress bar/ProgressProvider';
+
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
@@ -55,11 +58,15 @@ const UserProfile = () => {
       <p>
         Welcome back, {profile.name}
       </p>
+      {/* <CountUp end={profile.items_borrowed} duration={5} /> */}
+      
+      {/* <CountUp end={profile.items_lended} /> */}
       <h1>
+        <CountUp end={100} duration={5} useEasing={true} />
         items lended: {profile.items_lended}
       </h1>
       <h1>
-        items lended: {profile.items_borrowed}
+        items borrowed: {profile.items_borrowed}
       </h1>
     </div>
   )
