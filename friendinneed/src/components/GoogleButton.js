@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import classNames from "classnames";
+import google from './icons/google.svg';
 
-
-
-function YellowButton({className, ...props}) {
+function GoogleButton({className, ...props}) {
         const [selected, setSelected] = useState(false);
     
 
@@ -19,10 +18,10 @@ function YellowButton({className, ...props}) {
     //     console.log({text} + " " + {isClicked});
     // }
     const styles = classNames({
-        "rounded-full h-7 w-80 m-2 bg-light-gold text-black  \
-         hover:border-2 hover:border-gold \
-         active:bg-gold border-gold \
-         focus:shadow-md focus:shadow-light-gray": true,
+        "flex-auto gap-x-5 align-center rounded-full h-7 w-80 m-2 border-2 bg-white border-light-gray text-black \
+         hover:border-light-blue \
+         active:border-blue \
+         focus:shadow-md focus:shadow-light-gray focus:border-blue": true,
 
         // "border-grey text-grey \
         //  hover:bg-grey  hover:text-white \
@@ -36,12 +35,13 @@ function YellowButton({className, ...props}) {
     })
 
     return (
-        <div>
+        <div className="">
         <button onSubmit={doSubmit} className={styles}>
-            Button
+        <img src={google} style={{height: 15, display: 'unset'}}></img>
+            <span>                   Continue with Google</span>
             </button>
         </div>
     ); 
 }
 
-export default YellowButton;
+export default GoogleButton;

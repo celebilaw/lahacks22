@@ -8,6 +8,7 @@ import Login from "./components/Login.js";
 import Register from "./components/Register.js";
 import Navbar from "./components/NavBar.js";
 import BorrowRequests from "./components/GetBorrowRequests.js";
+import AboutUs from "./components/AboutUs";
 
 function App() {
   //const [user] = useAuthState(auth);
