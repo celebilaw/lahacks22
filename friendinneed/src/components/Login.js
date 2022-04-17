@@ -1,7 +1,7 @@
 import GoogleButton from './icons/google-sign-in.svg';
 import WelcomeLogo from './icons/welcome.svg';
 import "../css/Login.css";
-import { db } from '../config.js'
+import {db} from '../config';
 import Container from '@mui/material/Container';
 import GoogleButton1 from './GoogleButton1'
 // signInWithPopup(auth, provider)

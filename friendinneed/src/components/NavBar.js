@@ -13,7 +13,9 @@ import "@fontsource/lato";
 import "../css/Navbar.css";
 import YellowButton from './YellowButton';
 
-const Navbar = () => {
+import { borrowReqContext } from "../App";
+
+const Navbar = (props) => {
 
     const handleNewRequest = (e) => {
         document.getElementById("request-form").classList.toggle("show");
@@ -21,7 +23,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <PostRequest />
+            <PostRequest fetchData={props.fetchData} />
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar position="static" style={{ background: 'white' }}>
                     <Toolbar>

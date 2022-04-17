@@ -13,9 +13,7 @@ import '@fontsource/patua-one';
 import "@fontsource/lato";
 import ULegend from "./icons/urgency_legend.svg";
 
-function HomePage() {
-
-  const [borrowReqs, setBorrowReqs] = useState([]);
+function HomePage(props) {
   const [show, setShow] = React.useState(false);
 
   const handleClickShow = () => {
@@ -31,7 +29,7 @@ function HomePage() {
 
   const taskAssembly = (res) => {
     setTaskInfo([res.data.item, res.data.description,
-    res.data.requester, res.data.location, date, res.id])
+    res.data.requester, res.data.location, date, res.id]);
   }
 
   const makeTask = (res) => {
@@ -43,14 +41,19 @@ function HomePage() {
   const cancelRequest = async (id) => {
     const docRef = doc(db, "borrowrequests", id);
     await deleteDoc(docRef);
-    window.location.reload(true);
+    props.fetchData();
+    // window.location.reload(true);
   }
 
   const acceptRequest = async (id) => {
+    console.log("accept");
     const docRef = doc(db, "borrowrequests", id);
     await updateDoc(docRef, {
       status: 1
     });
+
+    // document.getElementById("request-info-popup").classList.toggle("show");
+    props.fetchData();
     window.location.reload(true);
   }
 
@@ -59,7 +62,7 @@ function HomePage() {
     await updateDoc(docRef, {
       status: 2
     });
-    window.location.reload(true);
+    props.fetchData();
   }
 
   const formatDate = (date) => {
@@ -67,18 +70,7 @@ function HomePage() {
   }
 
   useEffect(() => {
-    async function fetchData() {
-      const querySnapshot = await getDocs(collection(db, "borrowrequests"));
-      // querySnapshot.forEach((doc) => {
-      //   // doc.data() is never undefined for query doc snapshots
-      //   console.log(doc.id, " => ", doc.data());
-      // });
-      setBorrowReqs(querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        data: doc.data()
-      })));
-    }
-    fetchData();
+    props.fetchData();
   }, []);
 
   return (
@@ -90,7 +82,7 @@ function HomePage() {
 
       <div className="RightSide">
         <div className="RequestCards">
-          {borrowReqs.map((req) => (
+          {props.borrowReqs.map((req) => (
             <Request
               id={req.id}
               key={req.id}
