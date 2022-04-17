@@ -1,11 +1,12 @@
 import GoogleButton from './icons/google-sign-in.svg';
 import WelcomeLogo from './icons/welcome.svg';
 import "../css/Login.css";
-import { auth, provider, db } from '../config.js';
+import {db} from '../config';
+import Container from '@mui/material/Container';
+import { auth, provider } from '../config.js';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import { exists, setDoc, doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 const Login = () => {
     let navigate = useNavigate();
     const signInWithGoogle = () => {
@@ -48,17 +49,19 @@ const Login = () => {
             });
     }
     return (
-        <div>
+        <Container maxwidth="xl">
             <img className="welcomeImage" src={WelcomeLogo} alt="Main Welcome Symbol" />
-            <h2 className="welcome">
-                Welcome
-            </h2>
-            <p className="description">
-                Friend in Need is a community-based app to foster communal wellness
-                and make students’ daily lives easier.
-            </p>
-            <img onClick={signInWithGoogle} className="googleButton" src={GoogleButton} alt="google" />
-        </div>
+            <div className="rightContainer">
+                <h2 className="welcome">
+                    Welcome
+                </h2>
+                <p className="description">
+                    Friend in Need is a community-based app to foster communal wellness
+                    and make students’ daily lives easier.
+                </p>
+                <img className="googleButton" src={GoogleButton} alt="google" />
+            </div>
+        </Container>
     )
 }
 export default Login;

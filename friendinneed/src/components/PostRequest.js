@@ -16,6 +16,7 @@ import { auth, db } from '../config.js';
 import { collection, Timestamp, doc, setDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+
 // const user = auth.currentUser;
 // let name = ''
 // if(user){
@@ -39,7 +40,7 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-const PostRequest = () => {
+const PostRequest = (props) => {
 
   const [item, setItem] = useState("");
   const [description, setDescription] = useState("");
@@ -75,6 +76,9 @@ const PostRequest = () => {
 
     // Close new request form when user clicks submit
     document.getElementById("request-form").classList.toggle("show");
+    props.fetchData();
+
+    // window.location.reload(true);
   }
 
   const handleCancel = (e) => {
