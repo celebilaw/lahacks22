@@ -131,6 +131,7 @@ function HomePage(props) {
   return (
     <div className="HomeContainer">
       <div className="LeftSide">
+        <br/>
         <h1 style={{"line-height": "80%"}}>
           Current Requests
         </h1>
