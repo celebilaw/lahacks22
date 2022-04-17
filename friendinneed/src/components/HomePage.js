@@ -24,7 +24,7 @@ import { MenuItem } from "@mui/material";
 import landmarks from "./places.js";
 import "@fontsource/lato";
 
-let name, uid;
+let name, uid, email;
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
@@ -32,9 +32,9 @@ onAuthStateChanged(auth, (user) => {
     // const uid = user.uid;
     name = user.displayName;
     uid = user.uid;
+    email = user.email;
     // ...
   } else {
-    alert("User not logged in!");
     let navigate = useNavigate();
     navigate("/", { replace: true });
     // User is signed out
@@ -59,7 +59,6 @@ function HomePage(props) {
   };
 
   const [taskInfo, setTaskInfo] = useState([]);
-  const [date, convertDate] = useState("");
 
   const taskAssembly = (res) => {
     setTaskInfo([
@@ -67,7 +66,7 @@ function HomePage(props) {
       res.data.description,
       res.data.requestername,
       res.data.location,
-      date,
+      formatDate(res.data.posted.toDate()),
       res.id,
       res.data.fulfillername,
       res.data.fulfilleremail,
@@ -78,7 +77,6 @@ function HomePage(props) {
   const makeTask = (res) => {
     taskAssembly(res);
     handleClickShow();
-    convertDate(formatDate(res.data.posted.toDate())); // need to fix
   };
 
   const cancelRequest = async (id) => {
@@ -95,6 +93,7 @@ function HomePage(props) {
       status: 1,
       fulfiller: uid,
       fulfillername: name,
+      fulfilleremail: email
     });
 
     // document.getElementById("request-info-popup").classList.toggle("show");
@@ -132,10 +131,8 @@ function HomePage(props) {
   return (
     <div className="HomeContainer">
       <div className="LeftSide">
-        <h1>
-          Current
-          <br />
-          Requests
+        <h1 style={{"line-height": "80%"}}>
+          Current Requests
         </h1>
         <img src={ULegend} alt="Urgency Legend" width="100%" />
         <br />

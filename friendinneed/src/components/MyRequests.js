@@ -14,8 +14,7 @@ const MyRequests = () => {
   // console.log(user);
 
   const fetchPendingRequestsForUser = async () => {
-
-    const q = query(collection(db, "borrowrequests"), where("status", "==", 0), where("owner", "==", auth.currentUser.uid)); 
+    const q = query(collection(db, "borrowrequests"), where("status", "==", 0), where("requester", "==", auth.currentUser.uid)); 
     const querySnapshot = await getDocs(q);
     setPendingRequests(querySnapshot.docs.map(doc => ({
       id: doc.id,
@@ -24,7 +23,7 @@ const MyRequests = () => {
   };
 
   const fetchAcceptedRequestsForUser = async () => {
-    const q = query(collection(db, "borrowrequests"), where("status", "==", 1), where("owner", "==", auth.currentUser.uid)); 
+    const q = query(collection(db, "borrowrequests"), where("status", "==", 1), where("requester", "==", auth.currentUser.uid)); 
     const querySnapshot = await getDocs(q);
     setAcceptedRequests(querySnapshot.docs.map(doc => ({
       id: doc.id,

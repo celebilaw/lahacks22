@@ -34,7 +34,6 @@ onAuthStateChanged(auth, (user) => {
         email = user.email;
         // ...
     } else {
-        alert('User not logged in!');
         let navigate = useNavigate();
         navigate('/', { replace: true });
         // User is signed out
