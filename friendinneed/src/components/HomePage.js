@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { collection, getDocs } from "firebase/firestore";
+import { useState, useEffect } from 'react'
+import { collection, getDocs, query, where } from "firebase/firestore";
 import {db} from '../config.js';
 import "./HomePage.css"
 import Request from "./Request"
@@ -10,7 +10,9 @@ function HomePage() {
   
   useEffect(() => {
     async function fetchData() {
-      const querySnapshot = await getDocs(collection(db, "borrowrequests"));
+      const q = query(collection(db, "borrowrequests"), where("status", "!=", 2));
+      const querySnapshot = await getDocs(q);
+      
       // querySnapshot.forEach((doc) => {
       //   // doc.data() is never undefined for query doc snapshots
       //   console.log(doc.id, " => ", doc.data());
