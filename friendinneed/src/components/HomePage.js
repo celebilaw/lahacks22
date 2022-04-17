@@ -52,7 +52,7 @@ function HomePage(props) {
 
     // document.getElementById("request-info-popup").classList.toggle("show");
     props.fetchData();
-    window.location.reload(true);
+    setShow(false);
   }
 
   const completeRequest = async (id) => {
@@ -75,7 +75,7 @@ function HomePage(props) {
     <div className="HomeContainer">
       <div className="LeftSide">
         <h1>Current<br />Requests</h1>
-        <img src={ULegend} alt="Urgency Legend" />
+        <img src={ULegend} alt="Urgency Legend" width="100%"/>
       </div>
 
       <div className="RightSide">

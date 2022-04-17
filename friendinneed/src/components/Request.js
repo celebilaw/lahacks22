@@ -12,14 +12,14 @@ function Request(props) {
 
     return (
         <div className="RequestContainer">
-            <Card onClick={props.onClick} sx={{"border-radius": "15%", "padding-bottom": "5%" }}>
+            <Card onClick={props.onClick} sx={{"border-radius": "15%",}}>
                 <CardActionArea className="Individual">
                     <CardMedia
                         component="img"
                         alt="Urgency Color"
                         height="5"
                         image={require(`../imgs/${props.urgency}.png`)}
-                        sx={{ "padding-left": "80%", "padding-top": "10%" }}
+                        sx={{  }}
                     />
                     <CardContent>
                         <Typography variant="h5" component="div"><b>{props.item}</b></Typography>
