@@ -52,7 +52,7 @@ function HomePage(props) {
 
     // document.getElementById("request-info-popup").classList.toggle("show");
     props.fetchData();
-    // window.location.reload(true);
+    window.location.reload(true);
   }
 
   const completeRequest = async (id) => {
