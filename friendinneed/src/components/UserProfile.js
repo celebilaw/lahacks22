@@ -53,13 +53,19 @@ const UserProfile = () => {
   }, [user]);
 
   useEffect(() => {
-    if (progress < 50) {
-        setTimeout(() => {
-            setProgress(50*Math.tanh(0.01*index))
-            setIndex((prev) => {return prev + 1;});
-        }, 10);
+    if (!profile) return;
+    if (profile) {
+        const denom = profile.items_lended + profile.items_borrowed;
+        const percentage = (denom == 0) ? 0 : 100 * profile.items_lended / denom;
+        if (progress < percentage) {
+            setTimeout(() => {
+                setProgress(percentage*Math.tanh(percentage/100*0.02*index))
+                setIndex((prev) => {return prev + 1;});
+            }, 10);
+        }
     }
-}, [progress]);
+    
+}, [profile, progress]);
 
   return (
     <div style={{marginLeft: 100}}>
@@ -73,14 +79,14 @@ const UserProfile = () => {
       </div>
       <div style={{marginLeft: 100, width: '20%'}}>
         {/* <h1>style={{fontWeight: 700, fontSize: 120, color: '#F3C950'}} {profile.items_lended}</h1> */}
-        <CountUp style={{fontWeight: 700, fontSize: 120, color: '#F3C950'}} end={profile.items_lended} />
+        <CountUp style={{fontWeight: 700, fontSize: 120, color: '#F3C950'}} end={profile.items_lended} useEasing="true" />
         <h2 style={{fontSize: 20, lineHeight: 0.5}}>
           items lended
         </h2>
       </div>
       <div style={{marginLeft: 100, width: '20%'}}>
         {/* <h1>style={{fontWeight: 700, fontSize: 120, color: '#F3C950'}} {profile.items_borrowed}</h1> */}
-        <CountUp style={{fontWeight: 700, fontSize: 120, color: '#477BE8'}} end={profile.items_borrowed} />
+        <CountUp style={{fontWeight: 700, fontSize: 120, color: '#477BE8'}} end={profile.items_borrowed} useEasing="true" />
         <h2 style={{fontSize: 20, lineHeight: 0.5}}>
           items borrowed
         </h2>
@@ -89,10 +95,10 @@ const UserProfile = () => {
         <Circle 
             style={{width: '40%', marginLeft: '500px', marginBottom: '500px'}}
             percent={progress}
-            strokeWidth="4" 
-            strokeColor="#477BE8" 
-            trailColor="#F3C950"
-            trailWidth="4"
+            strokeWidth="6" 
+            strokeColor="#F3C950" 
+            trailColor={profile.items_lended + profile.items_borrowed == 0 ? "#d3d3d3" : "#477BE8"}
+            trailWidth="6"
             gapDegree="150"
             gapPosition="bottom"
         /> 
