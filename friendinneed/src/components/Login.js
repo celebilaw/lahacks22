@@ -21,8 +21,8 @@ import Container from '@mui/material/Container';
 //     const credential = GoogleAuthProvider.credentialFromError(error);
 //     // ...
 //   });
-import {auth, provider} from'../config.js';
-import {signInWithPopup, GoogleAuthProvider} from 'firebase/auth';
+import { auth, provider } from '../config.js';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
 import { collection, addDoc } from 'firebase/firestore';
@@ -54,21 +54,21 @@ const Login = () => {
                 // The AuthCredential type that was used.
                 const credential = GoogleAuthProvider.credentialFromError(error);
                 // ...
-                console.error({errorCode, errorMessage})
+                console.error({ errorCode, errorMessage })
             });
-        }
+    }
     return (
         <Container maxwidth="xl">
-            <img className="welcomeImage" src={WelcomeLogo} alt="Main Welcome Symbol"/>
+            <img className="welcomeImage" src={WelcomeLogo} alt="Main Welcome Symbol" />
             <div className="rightContainer">
                 <h2 className="welcome">
                     Welcome
                 </h2>
                 <p className="description">
-                    Friend in Need is a community-based app to foster communal wellness 
+                    Friend in Need is a community-based app to foster communal wellness
                     and make students’ daily lives easier.
                 </p>
-                <img className="googleButton" src={GoogleButton} alt="google"/>
+                <img className="googleButton" src={GoogleButton} alt="google" />
             </div>
         </Container>
     )

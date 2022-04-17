@@ -77,6 +77,8 @@ const PostRequest = (props) => {
     // Close new request form when user clicks submit
     document.getElementById("request-form").classList.toggle("show");
     props.fetchData();
+
+    // window.location.reload(true);
   }
 
   const handleCancel = (e) => {

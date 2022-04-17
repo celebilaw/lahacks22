@@ -11,47 +11,24 @@ function Request(props) {
     }
 
     return (
-        <Card onClick={props.onClick}>
-            <CardActionArea>
-                <CardContent>
-                    <Typography variant="h5" component="div">{props.item}</Typography>
-                    <Typography variant="body1">{props.description}</Typography>
-                    <Typography variant="body2"><b>Requester: </b>{props.requester}</Typography>
-                    <Typography variant="body2"><b>Urgency: </b>{props.urgency}</Typography>
-                    <Typography variant="body2"><b>Location: </b>{props.location}</Typography>
-                    {/* x */}
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Button 
-                    size="small" 
-                    color="primary"
-                    onClick={() => {
-                        props.cancelRequest(props.id);
-                    }}
-                >
-                cancel
-                </Button>
-                <Button 
-                    size="small" 
-                    color="primary"
-                    onClick={() => {
-                        props.acceptRequest(props.id);
-                    }}
-                >
-                Help out this poor soul!
-                </Button>
-                <Button 
-                    size="small" 
-                    color="primary"
-                    onClick={() => {
-                        props.completeRequest(props.id);
-                    }}
-                >
-                complete
-                </Button>
-            </CardActions>
-        </Card>
+        <div className="RequestContainer">
+            <Card onClick={props.onClick} sx={{"border-radius": "15%", "padding-bottom": "5%" }}>
+                <CardActionArea className="Individual">
+                    <CardMedia
+                        component="img"
+                        alt="Urgency Color"
+                        height="5"
+                        image={require(`../imgs/${props.urgency}.png`)}
+                        sx={{ "padding-left": "80%", "padding-top": "10%" }}
+                    />
+                    <CardContent>
+                        <Typography variant="h5" component="div"><b>{props.item}</b></Typography>
+                        <Typography variant="body2"><i>{props.location}</i></Typography>
+                        {/* x */}
+                    </CardContent>
+                </CardActionArea>
+            </Card>
+        </div>
     );
 }
 
